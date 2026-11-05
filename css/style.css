@@ -60,6 +60,7 @@
 
     /* --- Couleurs utilisées dans le site --- */
     --color-primary: rgb(var(--rgb-blue));
+    --color-cyan: rgb(var(--rgb-cyan));
     --color-primary-light: rgb(var(--rgb-blue-light));
     --color-accent: rgb(var(--rgb-violet));
     --color-accent-light: rgb(var(--rgb-violet-light));
@@ -364,8 +365,7 @@ section {
     width: 80px;
     height: 3px;
     border-radius: 2px;
-    background: var(--gradient-inline);
-    box-shadow: var(--shadow-line);
+    background: var(--color-cyan);
     transform: translateX(-50%);
 }
 
@@ -481,7 +481,7 @@ a.tag:hover {
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    padding: 0.7rem var(--space-5);
+    padding: 0.58rem var(--space-5);
     border-radius: var(--radius-sm);
     font-family: inherit;
     font-size: 0.95rem;
@@ -536,10 +536,10 @@ a.tag:hover {
     transition: var(--transition-card);
 }
 
-/* Carte mise en avant (ex. « Résultat » d'une fiche) : bordure dégradée pleine et fond teinté */
+/* Carte mise en avant (ex. « Résultat » d'une fiche) : bordure bleue et fond teinté */
 .card--highlight {
     --fill: linear-gradient(color-mix(in srgb, var(--bg-card) 88%, var(--color-primary)), color-mix(in srgb, var(--bg-card) 88%, var(--color-primary)));
-    --edge: var(--gradient-main);
+    --edge: linear-gradient(var(--color-primary), var(--color-primary));
 }
 
 /* Une carte cliquable se soulève au survol */
@@ -792,7 +792,7 @@ a.media-value:hover {
     left: calc(-1 * var(--space-6) + var(--space-2));
     width: calc(var(--space-6) - 2 * var(--space-2));
     height: 2px;
-    background: var(--gradient-inline);
+    background: var(--color-primary);
 }
 
 .flow li + li::after {
@@ -801,7 +801,7 @@ a.media-value:hover {
     top: calc(50% - 4px);
     left: calc(-1 * var(--space-2) - 6px);
     border: 5px solid transparent;
-    border-left-color: var(--color-accent);
+    border-left-color: var(--color-primary);
 }
 
 .flow-step-num {
@@ -857,7 +857,7 @@ a.media-value:hover {
 .carousel-progress span {
     display: block;
     height: 100%;
-    background: var(--gradient-inline);
+    background: var(--color-cyan);
     transform: scaleX(var(--progress, 0));
     transform-origin: left;
     transition: transform 0.15s linear;
@@ -926,16 +926,15 @@ nav {
     transform: translateY(-2px);
 }
 
-/* Petit losange dégradé entre « CQ » et « Portfolio » */
+/* Petit losange cyan entre « CQ » et « Portfolio » */
 .nav-title-dot {
     width: 7px;
     height: 7px;
-    background: var(--gradient-inline);
+    background: var(--color-cyan);
     transform: rotate(45deg);
 }
 
-/* Liens du menu : texte simple, sans cadre. La page active garde la patte du site
-   (texte en dégradé et fin trait dégradé dessous) sans encadré ni fond. */
+/* Liens du menu : texte simple, sans cadre. La page active est seulement écrite en cyan. */
 .nav-links {
     display: flex;
     gap: var(--space-2);
@@ -966,28 +965,14 @@ nav {
     transform: translateY(-2px) scale(1.1);
 }
 
-/* Page active : texte en dégradé, icône teintée, trait dégradé de 2 px sous le texte */
-.nav-links a.active span {
-    background: var(--gradient-inline);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+/* Page active : texte et icône en cyan */
+.nav-links a.active {
     font-weight: 600;
+    color: var(--color-cyan);
 }
 
 .nav-links a.active i {
-    -webkit-text-stroke-color: var(--color-primary-light);
-}
-
-.nav-links a.active::after {
-    content: '';
-    position: absolute;
-    right: var(--space-3);
-    bottom: 0;
-    left: var(--space-3);
-    height: 2px;
-    border-radius: var(--radius-pill);
-    background: var(--gradient-inline);
+    -webkit-text-stroke-color: var(--color-cyan);
 }
 
 .nav-links a:focus-visible {
@@ -1023,12 +1008,14 @@ nav {
  * 6. ACCUEIL : BANDEAU DE PRÉSENTATION
  * ============================================================ */
 
-/* Bandeau plein écran, contenu centré */
+/* Bandeau plein écran, contenu centré : en haut de page, son trait du bas
+   tombe au bas de la fenêtre (svh : hauteur sans la barre du navigateur mobile) */
 .hero {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: min(100vh, 720px);
+    min-height: 100vh;
+    min-height: 100svh;
     padding: calc(var(--header-h) + var(--space-7)) 0 var(--space-7);
     overflow: hidden;
     isolation: isolate;
@@ -1255,6 +1242,7 @@ nav {
     margin-bottom: var(--space-1);
     font-size: 0.98rem;
     font-weight: 600;
+    color: var(--color-primary-light);
 }
 
 .timeline-role {
@@ -1321,7 +1309,7 @@ nav {
 
 .skills-tab[aria-selected="true"] {
     --fill: linear-gradient(var(--bg-page-alt), var(--bg-page-alt));
-    --edge: var(--gradient-inline);
+    --edge: linear-gradient(var(--color-cyan), var(--color-cyan));
     box-shadow: var(--shadow-glow);
 }
 
@@ -1570,12 +1558,45 @@ a:hover .link-more {
     background: var(--tint-primary);
 }
 
+/* Ligne de catégorie : formation, puis entreprise par année (comme le tableau officiel) */
+.e5-table tbody tr.e5-cat th {
+    padding-top: var(--space-5);
+    font-family: var(--font-title);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-cyan);
+    background: var(--tint-primary);
+}
+
+.e5-table tbody tr.e5-cat:hover {
+    background: none;
+}
+
+.e5-table tbody th {
+    min-width: 280px;
+}
+
+.e5-docs {
+    display: block;
+    margin-top: var(--space-1);
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: var(--text-muted);
+}
+
+.e5-table td[data-label="Période"] {
+    font-size: 0.82rem;
+    white-space: nowrap;
+}
+
 /* Coche indiquant qu'une compétence est mobilisée */
 .e5-check {
     display: inline-block;
     width: 18px;
     height: 18px;
-    background: var(--gradient-inline);
+    background: var(--color-cyan);
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 6.5'/%3E%3C/svg%3E") center / contain no-repeat;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 6.5'/%3E%3C/svg%3E") center / contain no-repeat;
 }
@@ -2196,6 +2217,19 @@ footer p {
         padding: 0;
         border: none;
         text-align: left;
+    }
+
+    .e5-table tbody th {
+        min-width: 0;
+    }
+
+    .e5-table tbody tr.e5-cat {
+        padding: var(--space-3) var(--space-4);
+        background: var(--tint-primary);
+    }
+
+    .e5-table tbody tr.e5-cat th {
+        background: none;
     }
 
     .e5-table td:nth-of-type(1) {

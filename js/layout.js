@@ -42,6 +42,7 @@ const NAV_LINKS = [
     { href: 'index.html',           icon: 'fa-home',      label: 'Accueil' },
     { href: 'pages/briefcase.html', icon: 'fa-briefcase', label: 'Entreprise' },
     { href: 'pages/projects.html',  icon: 'fa-code',      label: 'Réalisations', section: 'pages/projets/' },
+    { href: 'pages/tableau-e5.html', icon: 'fa-table',    label: 'Tableau E5' },
     { href: 'pages/veille.html',    icon: 'fa-eye',       label: 'Veille' },
     { href: 'pages/contact.html',   icon: 'fa-envelope',  label: 'Contact' },
 ];
