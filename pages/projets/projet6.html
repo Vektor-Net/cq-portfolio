@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-SI d&#x27;entreprise · Corentin QUINIO</title>
+    <meta name="description" content="Déploiement conteneurisé d&#x27;un mini-SI d&#x27;entreprise (AD, GPO, GLPI en LDAPS, Zabbix, Grafana, sauvegardes restic) par Corentin QUINIO, BTS SIO SISR.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Portfolio de Corentin QUINIO">
+    <meta property="og:title" content="Mini-SI d&#x27;entreprise · Corentin QUINIO">
+    <meta property="og:description" content="Déploiement conteneurisé d&#x27;un mini-SI d&#x27;entreprise (AD, GPO, GLPI en LDAPS, Zabbix, Grafana, sauvegardes restic) par Corentin QUINIO, BTS SIO SISR.">
+    <link rel="icon" href="../../assets/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="../../js/layout.js"></script>
+</head>
+<body class="page-secondary">
+    <!-- En-tête et pied de page : écrits une seule fois dans js/layout.js -->
+    <site-header></site-header>
+
+    <main>
+        <section aria-labelledby="project-title">
+            <div class="container">
+                <a href="../projects.html" class="tag back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i>Toutes les réalisations</a>
+
+                <!-- En-tête de la fiche : présentation à gauche, faits clés à droite -->
+                <div class="split project-header">
+                    <div class="panel">
+                        <p class="kicker kicker--accent">Réalisation scolaire · lab</p>
+                        <i class="fas fa-cubes icon-lg" aria-hidden="true"></i>
+                        <h1 id="project-title">Déploiement d'un mini-SI d'entreprise conteneurisé</h1>
+                        <p class="project-lead">Monter et exploiter le SI d'une PME fictive, VEKTOR : annuaire, proxy imposé par GPO, helpdesk, supervision, logs centralisés et sauvegardes testées, sur des machines aux ressources limitées.</p>
+                    </div>
+                    <dl class="panel project-facts">
+                        <div class="tile"><dt class="eyebrow">Cadre</dt><dd>BTS SIO 2ᵉ année · TD transversal</dd></div>
+                        <div class="tile"><dt class="eyebrow">Périmètre</dt><dd>3 VM, 11 conteneurs</dd></div>
+                        <div class="tile"><dt class="eyebrow">Restauration testée</dt><dd>≈ 2 min</dd></div>
+                    </dl>
+                </div>
+
+                <!-- Technologies utilisées -->
+                <ul class="tag-list project-tags" aria-label="Technologies utilisées"><li class="tag">Windows Server 2025</li><li class="tag">AD DS</li><li class="tag">AD CS</li><li class="tag">GPO</li><li class="tag">Squid</li><li class="tag">Docker Compose</li><li class="tag">GLPI</li><li class="tag">LDAPS</li><li class="tag">Zabbix</li><li class="tag">Grafana / Loki</li><li class="tag">MinIO</li><li class="tag">restic</li></ul>
+
+                <!-- Corps de la fiche : contexte, environnement, démarche, résultat, difficultés, compétences -->
+                <div class="grid grid--2">
+                    <article class="card">
+                        <h2>Contexte &amp; problématique</h2>
+                        <p>VEKTOR veut une identité centralisée, une navigation web contrôlée, un helpdesk, une supervision, des logs centralisés et des sauvegardes testées.</p>
+                        <p>Les ressources sont limitées : tout le socle applicatif tourne en conteneurs Docker sur un seul serveur Linux.</p>
+                    </article>
+                    <article class="card">
+                        <h2>Environnement</h2>
+                        <ul class="bullet-list"><li>Windows Server 2025 : AD DS, DNS, autorité de certification</li><li>Debian 13 : hôte Docker, une stack Compose par service</li><li>Client Windows 11 joint au domaine</li><li>Squid, GLPI + MariaDB, Zabbix + PostgreSQL, Grafana / Loki / Promtail, MinIO</li></ul>
+                    </article>
+                    <article class="card span-full">
+                        <h2>Démarche</h2>
+                        <p>L'ordre de construction suit les dépendances, et chaque brique est vérifiée avant de passer à la suivante.</p>
+                        <ol class="steps">
+                            <li><strong>Identité</strong> : domaine Active Directory, DNS contrôlé par les enregistrements SRV, contrôleur synchronisé sur une source de temps externe (Kerberos refuse un écart de plus de 5 minutes).</li>
+                            <li><strong>Accès web</strong> : GPO qui impose le proxy aux deux niveaux de Windows (navigateurs et services système), avec bouclage pour suivre la machine et verrouillage côté utilisateur ; Squid limité au réseau local et aux ports 80/443.</li>
+                            <li><strong>Helpdesk</strong> : GLPI branché sur l'AD en LDAPS grâce à une autorité de certification d'entreprise, compte de service en lecture seule, profil technicien donné selon le groupe AD ; catégories ITIL, 4 SLA et gabarit « Nouvelle arrivée ».</li>
+                            <li><strong>Observabilité</strong> : Zabbix 7.0 LTS sur le contrôleur et l'hôte Docker, alerte testée en coupant un agent ; logs système, conteneurs et proxy centralisés dans Grafana / Loki.</li>
+                            <li><strong>Continuité</strong> : sauvegarde nocturne chiffrée vers MinIO avec restic (dumps des bases et fichiers GLPI), rétention 7 jours + 4 semaines, puis vrai test de restauration.</li>
+                        </ol>
+                    </article>
+                    <article class="card card--highlight">
+                        <h2>Résultat</h2>
+                        <p>La chaîne fonctionne de bout en bout : un salarié ouvre sa session Windows, navigue via le proxy imposé et se connecte au helpdesk avec son compte AD.</p>
+                        <p>Un ticket supprimé volontairement a été restauré en environ 2 minutes (RTO), pour une perte maximale de 24 h de données (RPO). Les mises en situation et le tableau de bord Grafana n'ont pas pu être faits dans le temps imparti.</p>
+                    </article>
+                    <article class="card">
+                        <h2>Difficultés résolues</h2>
+                        <ul class="bullet-list">
+                            <li><strong>Page GLPI blanche</strong> : partition /var saturée ; données de Docker et de containerd déplacées.</li>
+                            <li><strong>Liaison LDAP refusée</strong> : le contrôleur exige la signature LDAP ; passage en LDAPS plutôt que d'affaiblir l'AD.</li>
+                            <li><strong>Agent Zabbix « indisponible »</strong> : réponses de 5 s causées par la résolution d'un nom inconnu ; liste des serveurs autorisés corrigée.</li>
+                        </ul>
+                    </article>
+                    <article class="card">
+                        <h2>Pistes d'amélioration</h2>
+                        <ul class="bullet-list"><li>Mots de passe sortis des fichiers Compose (secrets Docker, coffre)</li><li>Interfaces web derrière un reverse proxy HTTPS</li><li>Sauvegardes hors du serveur, règle 3-2-1</li></ul>
+                    </article>
+                    <article class="card">
+                        <h2>Compétences mobilisées</h2>
+                        <ul class="bullet-list"><li>Active Directory, DNS et GPO</li><li>Conteneurisation avec Docker Compose</li><li>PKI et LDAPS</li><li>Supervision et centralisation des logs</li><li>Sauvegarde et PRA (RPO / RTO)</li><li>Documentation technique</li></ul>
+                    </article>
+                    <!-- Capture : une image représentative, dans assets/projets/projet6/ -->
+                    <article class="card span-full">
+                        <h2>En image</h2>
+                        <figure class="figure">
+                            <img src="../../assets/projets/projet6/conteneurs.webp" width="1800" height="527" loading="lazy" decoding="async" alt="Résultat de docker ps sur le serveur Debian : les 11 conteneurs du mini-SI sont démarrés">
+                            <figcaption>Les 11 conteneurs du mini-SI en fonctionnement : MinIO, Promtail, Squid, Grafana, Loki, Zabbix, PostgreSQL, GLPI et MariaDB.</figcaption>
+                        </figure>
+                    </article>
+                </div>
+
+                <!-- Liens vers la réalisation précédente et la suivante -->
+                <nav class="project-nav divided" aria-label="Autres réalisations">
+                <a href="projet5.html"><span class="eyebrow">← Précédente</span>Borne kiosque congés</a>
+                <a class="next" href="projet7.html"><span class="eyebrow">Suivante →</span>VPN OpenVPN + AD</a>
+                </nav>
+            </div>
+        </section>
+    </main>
+
+    <site-footer></site-footer>
+
+    <script src="../../js/script.js"></script>
+</body>
+</html>

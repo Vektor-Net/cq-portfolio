@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Liste des pages pour les moteurs de recherche.
+     À déclarer dans Google Search Console. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://vektor-net.github.io/cq-portfolio/index.html</loc></url>
+  <url><loc>https://vektor-net.github.io/cq-portfolio/pages/briefcase.html</loc></url>
+  <url><loc>https://vektor-net.github.io/cq-portfolio/pages/projects.html</loc></url>
+  <url><loc>https://vektor-net.github.io/cq-portfolio/pages/projets/projet1.html</loc></url>
+  <url><loc>https://vektor-net.github.io/cq-portfolio/pages/projets/projet2.html</loc></url>
+  <url><loc>https://vektor-net.github.io/cq-portfolio/pages/projets/projet3.html</loc></url>
+  <url><loc>https://vektor-net.github.io/cq-portfolio/pages/projets/projet4.html</loc></url>
+  <url><loc>https://vektor-net.github.io/cq-portfolio/pages/projets/projet5.html</loc></url>
+  <url><loc>https://vektor-net.github.io/cq-portfolio/pages/projets/projet6.html</loc></url>
+  <url><loc>https://vektor-net.github.io/cq-portfolio/pages/projets/projet7.html</loc></url>
+  <url><loc>https://vektor-net.github.io/cq-portfolio/pages/veille.html</loc></url>
+  <url><loc>https://vektor-net.github.io/cq-portfolio/pages/contact.html</loc></url>
+  <url><loc>https://vektor-net.github.io/cq-portfolio/pages/mentions-legales.html</loc></url>
+</urlset>

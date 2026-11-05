@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VPN OpenVPN + AD · Corentin QUINIO</title>
+    <meta name="description" content="Accès VPN nomade avec OpenVPN sur pfSense et authentification Active Directory par groupe, par Corentin QUINIO, BTS SIO SISR.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Portfolio de Corentin QUINIO">
+    <meta property="og:title" content="VPN OpenVPN + AD · Corentin QUINIO">
+    <meta property="og:description" content="Accès VPN nomade avec OpenVPN sur pfSense et authentification Active Directory par groupe, par Corentin QUINIO, BTS SIO SISR.">
+    <link rel="icon" href="../../assets/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="../../js/layout.js"></script>
+</head>
+<body class="page-secondary">
+    <!-- En-tête et pied de page : écrits une seule fois dans js/layout.js -->
+    <site-header></site-header>
+
+    <main>
+        <section aria-labelledby="project-title">
+            <div class="container">
+                <a href="../projects.html" class="tag back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i>Toutes les réalisations</a>
+
+                <!-- En-tête de la fiche : présentation à gauche, faits clés à droite -->
+                <div class="split project-header">
+                    <div class="panel">
+                        <p class="kicker kicker--accent">Réalisation scolaire · lab</p>
+                        <i class="fas fa-key icon-lg" aria-hidden="true"></i>
+                        <h1 id="project-title">Accès VPN nomade avec OpenVPN et authentification Active Directory</h1>
+                        <p class="project-lead">Déployer sur pfSense un accès distant sécurisé : un tunnel OpenVPN, une authentification déléguée à l'Active Directory et réservée à un groupe de sécurité, puis une connexion validée depuis un téléphone.</p>
+                    </div>
+                    <dl class="panel project-facts">
+                        <div class="tile"><dt class="eyebrow">Cadre</dt><dd>BTS SIO 2ᵉ année · lab</dd></div>
+                        <div class="tile"><dt class="eyebrow">Solution</dt><dd>pfSense + OpenVPN</dd></div>
+                        <div class="tile"><dt class="eyebrow">Accès</dt><dd>Réservé à un groupe AD</dd></div>
+                    </dl>
+                </div>
+
+                <!-- Technologies utilisées -->
+                <ul class="tag-list project-tags" aria-label="Technologies utilisées"><li class="tag">pfSense</li><li class="tag">OpenVPN</li><li class="tag">PKI</li><li class="tag">LDAP</li><li class="tag">Active Directory</li><li class="tag">Windows Server 2025</li><li class="tag">Pare-feu</li><li class="tag">PowerShell</li></ul>
+
+                <!-- Corps de la fiche : contexte, environnement, démarche, difficultés, résultat, compétences -->
+                <div class="grid grid--2">
+                    <article class="card">
+                        <h2>Contexte &amp; problématique</h2>
+                        <p>Des utilisateurs doivent atteindre le réseau interne depuis l'extérieur, sans que n'importe quel compte du domaine puisse se connecter.</p>
+                        <p>Le travail est découpé en trois jalons : une preuve de concept avec un compte local, la délégation de l'authentification à l'AD avec filtrage par groupe, puis une connexion mobile.</p>
+                    </article>
+                    <article class="card">
+                        <h2>Environnement</h2>
+                        <ul class="bullet-list"><li>pfSense entre le réseau interne et un réseau simulant Internet</li><li>Contrôleur de domaine Windows Server 2025</li><li>Client Windows placé hors du LAN, pour tester un vrai accès distant</li><li>Téléphone avec l'application OpenVPN Connect</li></ul>
+                    </article>
+                    <article class="card span-full">
+                        <h2>Démarche</h2>
+                        <ol class="steps">
+                            <li>Créer une autorité de certification interne sur pfSense et le certificat du serveur VPN.</li>
+                            <li>Configurer le serveur OpenVPN en accès distant : certificat et identifiants, tunnel UDP, clé TLS sur le canal de contrôle.</li>
+                            <li>Écrire les deux règles de pare-feu nécessaires : les connexions entrantes sur le WAN, et le trafic du tunnel vers le LAN.</li>
+                            <li>Valider avec un compte local de secours et un profil client exporté.</li>
+                            <li>Déléguer l'authentification à l'AD : OU dédiée, compte de service pour la liaison, requête limitée aux membres du groupe VPN.</li>
+                            <li>Tester : un membre du groupe est accepté, un non-membre est refusé, puis connexion depuis un téléphone hors du réseau de la salle.</li>
+                        </ol>
+                    </article>
+                    <article class="card span-full">
+                        <h2>Difficultés résolues</h2>
+                        <ul class="bullet-list">
+                            <li><strong>Paquet impossible à installer</strong> : le message d'erreur parlait d'une mise à jour en cours, mais la vraie cause était une IP statique en conflit sur le WAN, qui privait pfSense d'Internet. Passage du WAN en DHCP.</li>
+                            <li><strong>Liaison LDAP refusée avec des identifiants valides</strong> : diagnostic par élimination (test du port, état du compte, liaison rejouée en PowerShell puis en PHP depuis pfSense, journalisation LDAP détaillée, événements 2889 et 4776). Cause : Windows Server 2025 exige la signature des liaisons LDAP, imposée par la stratégie des contrôleurs de domaine.</li>
+                            <li>Pour le TP, cette exigence a été désactivée. En production, la bonne réponse est LDAPS, que j'ai ensuite mis en place sur le <a href="projet6.html">mini-SI</a>.</li>
+                        </ul>
+                    </article>
+                    <article class="card card--highlight">
+                        <h2>Résultat</h2>
+                        <p>L'accès distant fonctionne depuis un PC et depuis un téléphone, uniquement pour les membres du groupe AD autorisé. Un compte local de secours reste disponible si l'annuaire est injoignable.</p>
+                    </article>
+                    <article class="card">
+                        <h2>Compétences mobilisées</h2>
+                        <ul class="bullet-list"><li>PKI et certificats</li><li>Pare-feu et VPN</li><li>Annuaire LDAP / Active Directory</li><li>Diagnostic méthodique par les journaux</li><li>Sécurisation des accès distants</li></ul>
+                    </article>
+                    <!-- Capture : une image représentative, dans assets/projets/projet7/ -->
+                    <article class="card span-full">
+                        <h2>En image</h2>
+                        <figure class="figure">
+                            <img src="../../assets/projets/projet7/regle-openvpn.webp" width="1326" height="650" loading="lazy" decoding="async" alt="Règle de pare-feu pfSense sur l'interface OpenVPN autorisant le réseau du tunnel vers le LAN">
+                            <figcaption>La règle souvent oubliée : sans elle, le tunnel se monte mais aucun paquet n'atteint le réseau interne.</figcaption>
+                        </figure>
+                    </article>
+                </div>
+
+                <!-- Liens vers la réalisation précédente et la suivante -->
+                <nav class="project-nav divided" aria-label="Autres réalisations">
+                <a href="projet6.html"><span class="eyebrow">← Précédente</span>Mini-SI d'entreprise</a>
+                </nav>
+            </div>
+        </section>
+    </main>
+
+    <site-footer></site-footer>
+
+    <script src="../../js/script.js"></script>
+</body>
+</html>

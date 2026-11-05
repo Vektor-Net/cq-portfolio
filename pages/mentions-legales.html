@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentions légales · Corentin QUINIO</title>
+    <meta name="description" content="Mentions légales et données personnelles du portfolio de Corentin QUINIO : éditeur, hébergeur, formulaire de contact, droits RGPD.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Portfolio de Corentin QUINIO">
+    <meta property="og:title" content="Mentions légales · Corentin QUINIO">
+    <meta property="og:description" content="Mentions légales et données personnelles du portfolio de Corentin QUINIO : éditeur, hébergeur, formulaire de contact, droits RGPD.">
+    <link rel="icon" href="../assets/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/layout.js"></script>
+</head>
+<body class="page-secondary">
+    <!-- En-tête et pied de page : écrits une seule fois dans js/layout.js -->
+    <site-header></site-header>
+
+    <main>
+        <section aria-labelledby="page-title">
+            <div class="container">
+                <div class="page-hero">
+                    <p class="kicker">Informations légales</p>
+                    <h1 id="page-title" class="section-title">Mentions légales</h1>
+                    <p>Ce que la loi impose d'indiquer sur un site publié (loi pour la confiance dans l'économie numérique, LCEN) et ce que deviennent les données envoyées par le formulaire de contact (RGPD).</p>
+                </div>
+
+                <!-- Une surface par sujet : éditeur, hébergeur, données personnelles, propriété intellectuelle -->
+                <div class="grid">
+                    <article class="panel prose" aria-labelledby="ml-editeur">
+                        <h2 id="ml-editeur">Éditeur du site</h2>
+                        <p>Ce site est un portfolio personnel, non commercial, réalisé dans le cadre du BTS SIO option SISR (AFTEC Rennes). Il est édité par <strong>Corentin QUINIO</strong>, également directeur de la publication.</p>
+                        <p>Pour le contacter : <a href="contact.html">formulaire de contact</a>.</p>
+                    </article>
+
+                    <article class="panel prose" aria-labelledby="ml-hebergeur">
+                        <h2 id="ml-hebergeur">Hébergeur</h2>
+                        <p>Le site est hébergé par <strong>GitHub Inc.</strong> (service GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Téléphone : +1 877 448 4820. Site : <a href="https://github.com" rel="noopener">github.com</a>.</p>
+                    </article>
+
+                    <article class="panel prose" aria-labelledby="ml-donnees">
+                        <h2 id="ml-donnees">Données personnelles</h2>
+                        <p><strong>Formulaire de contact.</strong> Le nom, l'adresse e-mail, l'objet et le message que vous saisissez sont transmis par le service Web3Forms, qui me les envoie par e-mail. Ils servent uniquement à vous répondre et ne sont ni revendus ni utilisés à d'autres fins.</p>
+                        <!-- TODO : durée de conservation à confirmer par Corentin -->
+                        <p><strong>Conservation.</strong> Les messages sont conservés le temps de l'échange.</p>
+                        <p><strong>Cookies et mesure d'audience.</strong> Le site ne dépose aucun cookie et ne mesure pas l'audience. Les polices de caractères (Google Fonts) et les icônes (Font Awesome, via cdnjs) sont chargées depuis des serveurs externes : votre adresse IP leur est transmise, comme pour toute ressource chargée depuis Internet.</p>
+                        <p><strong>Vos droits.</strong> Vous pouvez demander l'accès, la rectification ou l'effacement de vos données en passant par le <a href="contact.html">formulaire de contact</a>. Vous pouvez aussi adresser une réclamation à la <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">CNIL</a>.</p>
+                    </article>
+
+                    <article class="panel prose" aria-labelledby="ml-propriete">
+                        <h2 id="ml-propriete">Propriété intellectuelle</h2>
+                        <p>Les textes, schémas et captures de ce site sont de Corentin QUINIO, sauf mention contraire. Le logo et les photos de Cordon Group appartiennent à Cordon Group. Les icônes viennent de Font Awesome Free (licence CC BY 4.0) et les polices Inter et Montserrat de Google Fonts (licence SIL Open Font).</p>
+                        <p>Les réalisations en entreprise sont présentées sans aucun document interne : les noms de clients, de serveurs et les adresses IP sont volontairement retirés.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <site-footer></site-footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

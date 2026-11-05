@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réalisations · Corentin QUINIO</title>
+    <meta name="description" content="Réalisations professionnelles et scolaires de Corentin QUINIO pour l&#x27;épreuve E5 du BTS SIO SISR.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Portfolio de Corentin QUINIO">
+    <meta property="og:title" content="Réalisations · Corentin QUINIO">
+    <meta property="og:description" content="Réalisations professionnelles et scolaires de Corentin QUINIO pour l&#x27;épreuve E5 du BTS SIO SISR.">
+    <link rel="icon" href="../assets/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/layout.js"></script>
+</head>
+<body class="page-secondary">
+    <!-- En-tête et pied de page : écrits une seule fois dans js/layout.js -->
+    <site-header></site-header>
+
+    <main>
+        <section aria-labelledby="page-title">
+            <div class="container">
+                <div class="page-hero">
+                    <p class="kicker">Épreuve E5</p>
+                    <h1 id="page-title" class="section-title">Réalisations</h1>
+                    <p>Quatre projets menés en lab pendant la formation et trois réalisations en entreprise chez Cordon Group. Ouvrez une fiche pour le contexte, la démarche et le résultat.</p>
+                </div>
+
+                <!-- Grille des réalisations : toutes visibles d'un coup (le jury voit tout sans faire défiler).
+                     Ordre = numéro de fiche. -->
+                <div class="project-rail-wrap">
+                    <ol class="project-rail" aria-label="Réalisations">
+                        <li>
+                            <a href="projets/projet1.html" class="project-slide project-slide--lab">
+                                <span class="project-slide-num" aria-hidden="true">01</span>
+                                <p class="project-slide-meta">Lab · 1re année</p>
+                                <h2>Déploiement de GLPI intégré à un domaine Active Directory</h2>
+                                <p>Un petit SI monté de zéro : domaine AD, GLPI sous Debian relié à l'annuaire en LDAPS, inventaire automatique et GPO.</p>
+                                <p class="project-slide-tags">GLPI · AD DS · LDAPS · GPO</p>
+                                <span class="link-more">Lire la fiche →</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="projets/projet2.html" class="project-slide project-slide--pro">
+                                <span class="project-slide-num" aria-hidden="true">02</span>
+                                <p class="project-slide-meta">Entreprise · Cordon Group</p>
+                                <h2>Migration de postes vers un nouveau site SentinelOne</h2>
+                                <p>64 postes et serveurs à rattacher à leur nouveau site, alors que l'anti-altération de l'agent bloquait la procédure habituelle.</p>
+                                <p class="project-slide-tags">SentinelOne · EDR · Mode sans échec</p>
+                                <span class="link-more">Lire la fiche →</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="projets/projet3.html" class="project-slide project-slide--lab">
+                                <span class="project-slide-num" aria-hidden="true">03</span>
+                                <p class="project-slide-meta">Lab · 1re année</p>
+                                <h2>Interconnexion de deux réseaux avec pfSense</h2>
+                                <p>Une VM pfSense qui route, filtre et donne l'accès à Internet à deux sous-réseaux isolés, Windows d'un côté, Debian de l'autre.</p>
+                                <p class="project-slide-tags">pfSense · Routage · NAT</p>
+                                <span class="link-more">Lire la fiche →</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="projets/projet4.html" class="project-slide project-slide--pro">
+                                <span class="project-slide-num" aria-hidden="true">04</span>
+                                <p class="project-slide-meta">Entreprise · Cordon Group</p>
+                                <h2>Accès sécurisé au portail d'un client via Citrix et carte à puce</h2>
+                                <p>Des postes préparés pour accéder aux ressources d'un client grand compte, avec authentification forte par carte à puce.</p>
+                                <p class="project-slide-tags">Citrix · NetScaler · PKI</p>
+                                <span class="link-more">Lire la fiche →</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="projets/projet5.html" class="project-slide project-slide--pro">
+                                <span class="project-slide-num" aria-hidden="true">05</span>
+                                <p class="project-slide-meta">Entreprise · Cordon Group</p>
+                                <h2>Borne tactile en mode kiosque pour la prise de congés</h2>
+                                <p>Un poste en libre-service qui n'affiche qu'une page web, simple à utiliser et impossible à détourner.</p>
+                                <p class="project-slide-tags">Windows 11 · Mode kiosque · Autologon</p>
+                                <span class="link-more">Lire la fiche →</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="projets/projet6.html" class="project-slide project-slide--lab">
+                                <span class="project-slide-num" aria-hidden="true">06</span>
+                                <p class="project-slide-meta">Lab · 2ᵉ année</p>
+                                <h2>Déploiement d'un mini-SI d'entreprise conteneurisé</h2>
+                                <p>3 VM et 11 conteneurs : AD, proxy imposé par GPO, GLPI en LDAPS, supervision, logs centralisés et restauration testée.</p>
+                                <p class="project-slide-tags">Docker · GLPI · Zabbix · restic</p>
+                                <span class="link-more">Lire la fiche →</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="projets/projet7.html" class="project-slide project-slide--lab">
+                                <span class="project-slide-num" aria-hidden="true">07</span>
+                                <p class="project-slide-meta">Lab · 2ᵉ année</p>
+                                <h2>Accès VPN nomade avec OpenVPN et authentification AD</h2>
+                                <p>Un tunnel OpenVPN sur pfSense, réservé à un groupe AD, validé depuis un PC distant et depuis un téléphone.</p>
+                                <p class="project-slide-tags">pfSense · OpenVPN · LDAP</p>
+                                <span class="link-more">Lire la fiche →</span>
+                            </a>
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Tableau de synthèse E5 : une ligne par réalisation, une colonne par compétence du bloc 1 -->
+                <section aria-labelledby="e5-title">
+                    <h2 id="e5-title" class="section-title">Tableau de synthèse</h2>
+                    <p class="section-intro">Correspondance entre mes réalisations et les compétences du bloc 1 « Support et mise à disposition de services informatiques ».</p>
+                    <div class="panel table-scroll">
+                        <table class="e5-table">
+                            <thead>
+                                <tr><th scope="col">Réalisation</th><th scope="col">Cadre</th><th scope="col">Gérer le patrimoine informatique</th><th scope="col">Répondre aux incidents et aux demandes</th><th scope="col">Développer la présence en ligne</th><th scope="col">Travailler en mode projet</th><th scope="col">Mettre à disposition un service informatique</th><th scope="col">Organiser son développement professionnel</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><th scope="row"><a href="projets/projet1.html">GLPI + Active Directory</a></th><td data-label="Cadre">Lab</td><td data-label="Gérer le patrimoine informatique"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Répondre aux incidents et aux demandes"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Développer la présence en ligne"><span class="visually-hidden">Non</span></td><td data-label="Travailler en mode projet"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Mettre à disposition un service informatique"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Organiser son développement professionnel"><span class="visually-hidden">Non</span></td></tr>
+                                <tr><th scope="row"><a href="projets/projet2.html">Migration SentinelOne</a></th><td data-label="Cadre">Entreprise</td><td data-label="Gérer le patrimoine informatique"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Répondre aux incidents et aux demandes"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Développer la présence en ligne"><span class="visually-hidden">Non</span></td><td data-label="Travailler en mode projet"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Mettre à disposition un service informatique"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Organiser son développement professionnel"><span class="visually-hidden">Non</span></td></tr>
+                                <tr><th scope="row"><a href="projets/projet3.html">Interconnexion pfSense</a></th><td data-label="Cadre">Lab</td><td data-label="Gérer le patrimoine informatique"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Répondre aux incidents et aux demandes"><span class="visually-hidden">Non</span></td><td data-label="Développer la présence en ligne"><span class="visually-hidden">Non</span></td><td data-label="Travailler en mode projet"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Mettre à disposition un service informatique"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Organiser son développement professionnel"><span class="visually-hidden">Non</span></td></tr>
+                                <tr><th scope="row"><a href="projets/projet4.html">Accès Citrix sécurisé</a></th><td data-label="Cadre">Entreprise</td><td data-label="Gérer le patrimoine informatique"><span class="visually-hidden">Non</span></td><td data-label="Répondre aux incidents et aux demandes"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Développer la présence en ligne"><span class="visually-hidden">Non</span></td><td data-label="Travailler en mode projet"><span class="visually-hidden">Non</span></td><td data-label="Mettre à disposition un service informatique"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Organiser son développement professionnel"><span class="visually-hidden">Non</span></td></tr>
+                                <tr><th scope="row"><a href="projets/projet5.html">Borne kiosque congés</a></th><td data-label="Cadre">Entreprise</td><td data-label="Gérer le patrimoine informatique"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Répondre aux incidents et aux demandes"><span class="visually-hidden">Non</span></td><td data-label="Développer la présence en ligne"><span class="visually-hidden">Non</span></td><td data-label="Travailler en mode projet"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Mettre à disposition un service informatique"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Organiser son développement professionnel"><span class="visually-hidden">Non</span></td></tr>
+                                <tr><th scope="row"><a href="projets/projet6.html">Mini-SI d'entreprise</a></th><td data-label="Cadre">Lab</td><td data-label="Gérer le patrimoine informatique"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Répondre aux incidents et aux demandes"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Développer la présence en ligne"><span class="visually-hidden">Non</span></td><td data-label="Travailler en mode projet"><span class="visually-hidden">Non</span></td><td data-label="Mettre à disposition un service informatique"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Organiser son développement professionnel"><span class="e5-check" role="img" aria-label="Oui"></span></td></tr>
+                                <!-- TODO : compétences du VPN à confirmer avec le formateur (seule « mise à disposition » est cochée) -->
+                                <tr><th scope="row"><a href="projets/projet7.html">VPN OpenVPN + AD</a></th><td data-label="Cadre">Lab</td><td data-label="Gérer le patrimoine informatique"><span class="visually-hidden">Non</span></td><td data-label="Répondre aux incidents et aux demandes"><span class="visually-hidden">Non</span></td><td data-label="Développer la présence en ligne"><span class="visually-hidden">Non</span></td><td data-label="Travailler en mode projet"><span class="visually-hidden">Non</span></td><td data-label="Mettre à disposition un service informatique"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Organiser son développement professionnel"><span class="visually-hidden">Non</span></td></tr>
+                                <tr><th scope="row"><a href="../index.html">Ce portfolio</a></th><td data-label="Cadre">Personnel</td><td data-label="Gérer le patrimoine informatique"><span class="visually-hidden">Non</span></td><td data-label="Répondre aux incidents et aux demandes"><span class="visually-hidden">Non</span></td><td data-label="Développer la présence en ligne"><span class="e5-check" role="img" aria-label="Oui"></span></td><td data-label="Travailler en mode projet"><span class="visually-hidden">Non</span></td><td data-label="Mettre à disposition un service informatique"><span class="visually-hidden">Non</span></td><td data-label="Organiser son développement professionnel"><span class="e5-check" role="img" aria-label="Oui"></span></td></tr>
+                                <tr><th scope="row"><a href="veille.html">Veille technologique</a></th><td data-label="Cadre">Personnel</td><td data-label="Gérer le patrimoine informatique"><span class="visually-hidden">Non</span></td><td data-label="Répondre aux incidents et aux demandes"><span class="visually-hidden">Non</span></td><td data-label="Développer la présence en ligne"><span class="visually-hidden">Non</span></td><td data-label="Travailler en mode projet"><span class="visually-hidden">Non</span></td><td data-label="Mettre à disposition un service informatique"><span class="visually-hidden">Non</span></td><td data-label="Organiser son développement professionnel"><span class="e5-check" role="img" aria-label="Oui"></span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <site-footer></site-footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interconnexion pfSense · Corentin QUINIO</title>
+    <meta name="description" content="Relier deux sous-réseaux isolés par une VM pfSense qui route, filtre et donne l&#x27;accès à Internet, avec un environnement Windows d&#x27;un côté et Debian de l&#x27;autre.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Portfolio de Corentin QUINIO">
+    <meta property="og:title" content="Interconnexion pfSense · Corentin QUINIO">
+    <meta property="og:description" content="Relier deux sous-réseaux isolés par une VM pfSense qui route, filtre et donne l&#x27;accès à Internet, avec un environnement Windows d&#x27;un côté et Debian de l&#x27;autre.">
+    <link rel="icon" href="../../assets/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="../../js/layout.js"></script>
+</head>
+<body class="page-secondary">
+    <!-- En-tête et pied de page : écrits une seule fois dans js/layout.js -->
+    <site-header></site-header>
+
+    <main>
+        <section aria-labelledby="project-title">
+            <div class="container">
+                <a href="../projects.html" class="tag back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i>Toutes les réalisations</a>
+
+                <!-- En-tête de la fiche : présentation à gauche, faits clés à droite -->
+                <div class="split project-header">
+                    <div class="panel">
+                        <p class="kicker kicker--accent">Réalisation scolaire · lab</p>
+                        <i class="fas fa-network-wired icon-lg" aria-hidden="true"></i>
+                        <h1 id="project-title">Interconnexion de deux réseaux avec pfSense</h1>
+                        <p class="project-lead">Relier deux sous-réseaux isolés par une VM pfSense qui route, filtre et donne l'accès à Internet, avec un environnement Windows d'un côté et Debian de l'autre.</p>
+                    </div>
+                    <dl class="panel project-facts">
+                        <div class="tile"><dt class="eyebrow">Cadre</dt><dd>BTS SIO · lab virtualisé</dd></div>
+                        <div class="tile"><dt class="eyebrow">Solution</dt><dd>pfSense</dd></div>
+                        <div class="tile"><dt class="eyebrow">Finalité</dt><dd>Router, filtrer, NAT</dd></div>
+                    </dl>
+                </div>
+
+                <!-- Technologies utilisées -->
+                <ul class="tag-list project-tags" aria-label="Technologies utilisées"><li class="tag">pfSense</li><li class="tag">Routage</li><li class="tag">NAT</li><li class="tag">Pare-feu</li><li class="tag">DHCP</li><li class="tag">DNS</li><li class="tag">VMware</li></ul>
+
+                <!-- Corps de la fiche : contexte, environnement, démarche, résultat, compétences -->
+                <div class="grid grid--2">
+                    <article class="card">
+                        <h2>Contexte &amp; problématique</h2>
+                        <p>Deux réseaux de lab, chacun dans son propre segment, doivent pouvoir communiquer entre eux et sortir sur Internet, sans pour autant tout laisser passer.</p>
+                        <p>pfSense joue le rôle de passerelle centrale : il route entre les deux LAN, applique les règles de filtrage et fait la traduction d'adresses vers l'extérieur.</p>
+                    </article>
+                    <article class="card">
+                        <h2>Environnement</h2>
+                        <ul class="bullet-list"><li>Windows Server 2019 (DHCP, DNS) et client Windows 11</li><li>Serveur Debian (DHCP, DNS) et client Debian</li><li>Chaque environnement dans un LAN segment distinct</li><li>Une VM pfSense pour interconnecter les deux</li></ul>
+                    </article>
+                    <article class="card span-full">
+                        <h2>Démarche</h2>
+                        <ol class="steps">
+                            <li>Définir la topologie et le plan d'adressage (WAN, deux LAN).</li>
+                            <li>Installer pfSense en VM et configurer les interfaces et les passerelles.</li>
+                            <li>Mettre en place le NAT vers Internet.</li>
+                            <li>Écrire les règles de pare-feu en partant du moindre privilège.</li>
+                            <li>Configurer et vérifier DHCP et DNS de chaque côté.</li>
+                            <li>Tester : ping entre sous-réseaux, résolution DNS, accès web, lecture des logs.</li>
+                        </ol>
+                    </article>
+                    <article class="card card--highlight">
+                        <h2>Résultat</h2>
+                        <p>Les deux réseaux communiquent à travers pfSense, la segmentation est respectée et l'accès à Internet passe par le NAT avec des règles maîtrisées.</p>
+                    </article>
+                    <article class="card">
+                        <h2>Compétences mobilisées</h2>
+                        <ul class="bullet-list"><li>Adressage IP et routage</li><li>Filtrage et NAT</li><li>Services DHCP / DNS</li><li>Virtualisation réseau</li><li>Méthode de test et diagnostic</li></ul>
+                    </article>
+                    <!-- Capture : une image représentative, dans assets/projets/projet3/ -->
+                    <article class="card span-full">
+                        <h2>En image</h2>
+                        <figure class="figure">
+                            <img src="../../assets/projets/projet3/ping-inter-reseaux.webp" width="1400" height="616" loading="lazy" decoding="async" alt="Ping réussi depuis le serveur Debian vers deux machines du réseau Windows, à travers pfSense">
+                            <figcaption>Depuis le réseau Debian, les machines du réseau Windows répondent : le routage passe par pfSense.</figcaption>
+                        </figure>
+                    </article>
+                </div>
+
+                <!-- Liens vers la réalisation précédente et la suivante -->
+                <nav class="project-nav divided" aria-label="Autres réalisations">
+                <a href="projet2.html"><span class="eyebrow">← Précédente</span>Migration SentinelOne</a>
+                <a class="next" href="projet4.html"><span class="eyebrow">Suivante →</span>Accès Citrix sécurisé</a>
+                </nav>
+            </div>
+        </section>
+    </main>
+
+    <site-footer></site-footer>
+
+    <script src="../../js/script.js"></script>
+</body>
+</html>

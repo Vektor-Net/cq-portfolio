@@ -1,0 +1,6 @@
+# Le site entier peut être indexé
+User-agent: *
+Allow: /
+
+# Adresse du plan du site
+Sitemap: https://vektor-net.github.io/cq-portfolio/sitemap.xml

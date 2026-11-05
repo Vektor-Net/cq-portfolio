@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact · Corentin QUINIO</title>
+    <meta name="description" content="Écrire à Corentin QUINIO, étudiant en BTS SIO SISR en alternance, via le formulaire de contact.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Portfolio de Corentin QUINIO">
+    <meta property="og:title" content="Contact · Corentin QUINIO">
+    <meta property="og:description" content="Écrire à Corentin QUINIO, étudiant en BTS SIO SISR en alternance, via le formulaire de contact.">
+    <link rel="icon" href="../assets/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/layout.js"></script>
+</head>
+<body class="page-secondary">
+    <!-- En-tête et pied de page : écrits une seule fois dans js/layout.js -->
+    <site-header></site-header>
+
+    <main>
+        <section aria-labelledby="page-title">
+            <div class="container">
+                <div class="page-hero">
+                    <p class="kicker">Contact</p>
+                    <h1 id="page-title" class="section-title">Me contacter</h1>
+                    <p>Une question sur une réalisation, sur mon parcours ou une proposition ? Écrivez-moi ici : le message m'arrive directement par e-mail et je vous réponds à l'adresse que vous indiquez.</p>
+                </div>
+
+                <!-- Formulaire à gauche, informations à droite. Aucune coordonnée n'est écrite dans la page :
+                     le formulaire est envoyé au service Web3Forms (setupContactForm, script.js),
+                     qui transfère le message par e-mail. La clé ci-dessous est publique et ne révèle
+                     pas l'adresse de destination. -->
+                <div class="contact-layout">
+                    <form class="panel contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate aria-labelledby="form-title">
+                        <h2 id="form-title" class="section-title section-title--left section-title--sm">Écrire un message</h2>
+
+                        <!-- TODO : remplacer par la clé reçue sur web3forms.com (champ « Create your Access Key ») -->
+                        <input type="hidden" name="access_key" value="A-REMPLACER-PAR-LA-CLE-WEB3FORMS">
+                        <input type="hidden" name="from_name" value="Portfolio Corentin QUINIO">
+                        <!-- Piège à robots : champ invisible, rempli seulement par un script automatique -->
+                        <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+                        <div class="grid grid--2 grid--tight">
+                            <div class="field">
+                                <label for="contact-name">Nom</label>
+                                <input id="contact-name" name="name" type="text" autocomplete="name" required maxlength="80">
+                                <p class="field-error" id="contact-name-error"></p>
+                            </div>
+                            <div class="field">
+                                <label for="contact-email">E-mail</label>
+                                <input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="120">
+                                <p class="field-error" id="contact-email-error"></p>
+                            </div>
+                            <div class="field span-full">
+                                <label for="contact-subject">Objet</label>
+                                <input id="contact-subject" name="subject" type="text" required maxlength="120">
+                                <p class="field-error" id="contact-subject-error"></p>
+                            </div>
+                            <div class="field span-full">
+                                <label for="contact-message">Message</label>
+                                <textarea id="contact-message" name="message" rows="6" required minlength="10" maxlength="3000"></textarea>
+                                <p class="field-error" id="contact-message-error"></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-form-foot">
+                            <button type="submit" class="btn"><i class="fas fa-paper-plane" aria-hidden="true"></i><span>Envoyer</span></button>
+                            <p class="form-status" role="status" aria-live="polite"></p>
+                        </div>
+                        <!-- Information RGPD au moment de la collecte (article 13) -->
+                        <p class="form-note">Vos informations servent uniquement à vous répondre : elles me sont transmises par e-mail via le service Web3Forms et ne sont ni revendues ni réutilisées. Détails et droits dans les <a href="mentions-legales.html">mentions légales</a>.</p>
+                    </form>
+
+                    <aside class="contact-side" aria-label="Informations">
+                        <ul class="contact-list">
+                            <li class="card media">
+                                <i class="fas fa-location-dot" aria-hidden="true"></i>
+                                <div><h2 class="eyebrow">Localisation</h2><span class="media-value">Dinan (22)</span></div>
+                            </li>
+                            <li class="card media">
+                                <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                                <div><h2 class="eyebrow">Formation</h2><span class="media-value">BTS SIO SISR</span><span class="media-detail">AFTEC Rennes · 2025 – 2027</span></div>
+                            </li>
+                            <li class="card media">
+                                <i class="fas fa-briefcase" aria-hidden="true"></i>
+                                <div><h2 class="eyebrow">Alternance</h2><span class="media-value">Cordon Group</span><span class="media-detail">Siège de Quévert (22)</span></div>
+                            </li>
+                        </ul>
+                        <!-- CV envoyé sur demande : le lien pré-remplit le formulaire (setupContactForm) -->
+                        <p class="contact-note">Mon CV contient mes coordonnées : je vous l'envoie par e-mail sur simple demande.</p>
+                        <a href="?objet=cv" class="btn btn--secondary" data-request-cv><i class="fas fa-file-lines" aria-hidden="true"></i>Demander mon CV</a>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <site-footer></site-footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

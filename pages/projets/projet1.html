@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLPI + Active Directory · Corentin QUINIO</title>
+    <meta name="description" content="Monter de zéro un petit SI d&#x27;entreprise en lab : un domaine Active Directory, un serveur GLPI sous Debian relié à l&#x27;annuaire en LDAPS, l&#x27;inventaire automatique des postes et des GPO pour tout distribuer.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Portfolio de Corentin QUINIO">
+    <meta property="og:title" content="GLPI + Active Directory · Corentin QUINIO">
+    <meta property="og:description" content="Monter de zéro un petit SI d&#x27;entreprise en lab : un domaine Active Directory, un serveur GLPI sous Debian relié à l&#x27;annuaire en LDAPS, l&#x27;inventaire automatique des postes et des GPO pour tout distribuer.">
+    <link rel="icon" href="../../assets/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="../../js/layout.js"></script>
+</head>
+<body class="page-secondary">
+    <!-- En-tête et pied de page : écrits une seule fois dans js/layout.js -->
+    <site-header></site-header>
+
+    <main>
+        <section aria-labelledby="project-title">
+            <div class="container">
+                <a href="../projects.html" class="tag back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i>Toutes les réalisations</a>
+
+                <!-- En-tête de la fiche : présentation à gauche, faits clés à droite -->
+                <div class="split project-header">
+                    <div class="panel">
+                        <p class="kicker kicker--accent">Réalisation scolaire · lab</p>
+                        <i class="fas fa-ticket icon-lg" aria-hidden="true"></i>
+                        <h1 id="project-title">Déploiement de GLPI intégré à un domaine Active Directory</h1>
+                        <p class="project-lead">Monter de zéro un petit SI d'entreprise en lab : un domaine Active Directory, un serveur GLPI sous Debian relié à l'annuaire en LDAPS, l'inventaire automatique des postes et des GPO pour tout distribuer.</p>
+                    </div>
+                    <dl class="panel project-facts">
+                        <div class="tile"><dt class="eyebrow">Cadre</dt><dd>BTS SIO · lab virtualisé</dd></div>
+                        <div class="tile"><dt class="eyebrow">Solution</dt><dd>GLPI + GLPI Agent</dd></div>
+                        <div class="tile"><dt class="eyebrow">Finalité</dt><dd>Centraliser le support et le parc</dd></div>
+                    </dl>
+                </div>
+
+                <!-- Technologies utilisées -->
+                <ul class="tag-list project-tags" aria-label="Technologies utilisées"><li class="tag">GLPI</li><li class="tag">Windows Server 2025</li><li class="tag">AD DS</li><li class="tag">GPO</li><li class="tag">Debian</li><li class="tag">LDAPS</li><li class="tag">MariaDB</li></ul>
+
+                <!-- Corps de la fiche : contexte, environnement, démarche, résultat, compétences -->
+                <div class="grid grid--2">
+                    <article class="card">
+                        <h2>Contexte &amp; problématique</h2>
+                        <p>Reproduire l'environnement d'un service informatique : un outil de ticketing et de gestion de parc branché sur l'annuaire de l'entreprise, pour que les utilisateurs s'y connectent avec leur compte de domaine et que les postes remontent tout seuls dans l'inventaire.</p>
+                        <p>La difficulté principale : l'AD refuse les connexions LDAP non chiffrées, il a donc fallu mettre en place LDAPS avec un échange de certificat entre le contrôleur de domaine et le serveur Debian.</p>
+                    </article>
+                    <article class="card">
+                        <h2>Environnement</h2>
+                        <ul class="bullet-list"><li>Windows Server 2025 : AD DS, DNS, DHCP</li><li>Client Windows 11 joint au domaine</li><li>Serveur Debian : Apache, PHP, MariaDB</li><li>Réseau de lab avec plan d'adressage dédié</li></ul>
+                    </article>
+                    <article class="card span-full">
+                        <h2>Démarche</h2>
+                        <ol class="steps">
+                            <li>Préparer le lab : machines virtuelles, adressage IP, nommage.</li>
+                            <li>Installer AD DS, DNS et DHCP sur le Windows Server, puis joindre le client Windows 11 et le serveur Debian au domaine.</li>
+                            <li>Installer la stack GLPI sur Debian (Apache, PHP, MariaDB), configurer le VirtualHost et terminer l'assistant web.</li>
+                            <li>Sécuriser l'installation : suppression du dossier <code>install/</code> et durcissement de base.</li>
+                            <li>Relier GLPI à l'annuaire en LDAPS : certificat du contrôleur de domaine, confiance côté Debian, import des utilisateurs.</li>
+                            <li>Activer l'inventaire : plugin et GLPI Agent sur les postes, déployé par script de démarrage GPO.</li>
+                            <li>Créer les GPO utilisateurs (raccourci GLPI, lecteur réseau) et valider avec <code>gpupdate /force</code>.</li>
+                        </ol>
+                    </article>
+                    <article class="card card--highlight">
+                        <h2>Résultat</h2>
+                        <p>GLPI opérationnel : authentification avec les comptes AD via LDAPS, postes inventoriés automatiquement, raccourci et lecteur réseau déployés par GPO. Le paramétrage ITSM (catégories ITIL, gabarits, SLA) est en place.</p>
+                    </article>
+                    <article class="card">
+                        <h2>Compétences mobilisées</h2>
+                        <ul class="bullet-list"><li>Active Directory, DNS, DHCP, GPO</li><li>Administration Linux et stack web</li><li>PKI : certificats et LDAPS</li><li>Industrialisation d'un déploiement</li><li>Rédaction de procédure</li></ul>
+                    </article>
+                    <!-- Capture : une image représentative, dans assets/projets/projet1/ -->
+                    <article class="card span-full">
+                        <h2>En image</h2>
+                        <figure class="figure">
+                            <img src="../../assets/projets/projet1/ticket-sla.webp" width="1600" height="849" loading="lazy" decoding="async" alt="Ticket GLPI de test : technicien issu de l'Active Directory, poste du domaine lié et échéances TTO / TTR calculées par les SLA">
+                            <figcaption>Ticket de test : le technicien vient de l'Active Directory, le poste du domaine est lié et les SLA calculent les échéances de prise en charge et de résolution.</figcaption>
+                        </figure>
+                    </article>
+                </div>
+
+                <!-- Liens vers la réalisation précédente et la suivante -->
+                <nav class="project-nav divided" aria-label="Autres réalisations">
+                <a class="next" href="projet2.html"><span class="eyebrow">Suivante →</span>Migration SentinelOne</a>
+                </nav>
+            </div>
+        </section>
+    </main>
+
+    <site-footer></site-footer>
+
+    <script src="../../js/script.js"></script>
+</body>
+</html>

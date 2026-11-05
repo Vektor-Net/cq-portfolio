@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migration SentinelOne · Corentin QUINIO</title>
+    <meta name="description" content="Après une migration de la console SentinelOne, rattacher 64 postes et serveurs à leur nouveau site, alors que la protection anti-altération de l&#x27;agent bloquait la procédure habituelle.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Portfolio de Corentin QUINIO">
+    <meta property="og:title" content="Migration SentinelOne · Corentin QUINIO">
+    <meta property="og:description" content="Après une migration de la console SentinelOne, rattacher 64 postes et serveurs à leur nouveau site, alors que la protection anti-altération de l&#x27;agent bloquait la procédure habituelle.">
+    <link rel="icon" href="../../assets/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="../../js/layout.js"></script>
+</head>
+<body class="page-secondary">
+    <!-- En-tête et pied de page : écrits une seule fois dans js/layout.js -->
+    <site-header></site-header>
+
+    <main>
+        <section aria-labelledby="project-title">
+            <div class="container">
+                <a href="../projects.html" class="tag back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i>Toutes les réalisations</a>
+
+                <!-- En-tête de la fiche : présentation à gauche, faits clés à droite -->
+                <div class="split project-header">
+                    <div class="panel">
+                        <p class="kicker">Réalisation professionnelle</p>
+                        <i class="fas fa-shield-halved icon-lg" aria-hidden="true"></i>
+                        <h1 id="project-title">Migration de postes vers un nouveau site SentinelOne</h1>
+                        <p class="project-lead">Après une migration de la console SentinelOne, rattacher 64 postes et serveurs à leur nouveau site, alors que la protection anti-altération de l'agent bloquait la procédure habituelle.</p>
+                    </div>
+                    <dl class="panel project-facts">
+                        <div class="tile"><dt class="eyebrow">Cadre</dt><dd>Alternance · Cordon Group</dd></div>
+                        <div class="tile"><dt class="eyebrow">Périmètre</dt><dd>64 postes et serveurs</dd></div>
+                        <div class="tile"><dt class="eyebrow">Parc concerné</dt><dd>~1 500 postes</dd></div>
+                    </dl>
+                </div>
+
+                <!-- Technologies utilisées -->
+                <ul class="tag-list project-tags" aria-label="Technologies utilisées"><li class="tag">SentinelOne</li><li class="tag">EDR</li><li class="tag">Anti-tampering</li><li class="tag">Windows</li><li class="tag">Mode sans échec</li><li class="tag">Planification</li></ul>
+
+                <!-- Corps de la fiche : contexte, environnement, démarche, résultat, compétences -->
+                <div class="grid grid--2">
+                    <article class="card">
+                        <h2>Contexte &amp; problématique</h2>
+                        <p>Chaque agent SentinelOne est rattaché à un site de la console grâce à un <em>Site Token</em>, une sorte de carte d'identité. Après la migration de la console, une partie du parc devait changer de site.</p>
+                        <p>Normalement, un utilitaire fourni avec l'agent permet de changer le token à la volée, mais il demande une <em>passphrase</em> qui n'était plus disponible. Et l'anti-tampering, qui empêche justement de désinstaller ou modifier l'EDR, bloquait toute autre manipulation.</p>
+                    </article>
+                    <article class="card">
+                        <h2>Environnement</h2>
+                        <ul class="bullet-list"><li>Parc d'environ 1 500 postes</li><li>EDR SentinelOne</li><li>Restrictions par GPO et élévation de droits contrôlée</li><li>64 machines : postes de production, PC de robots, portables de direction, serveur Debian</li></ul>
+                    </article>
+                    <article class="card span-full">
+                        <h2>Démarche</h2>
+                        <ol class="steps">
+                            <li>Identifier les machines à migrer et prioriser selon leur usage.</li>
+                            <li>Récupérer le nouveau Site Token dans la console.</li>
+                            <li>Chercher une solution avec le service SSI et l'IT Group : redémarrer en mode sans échec, forcer la désinstallation de l'agent avec l'ancien token, puis le réinstaller avec le nouveau.</li>
+                            <li>Localiser chaque machine : bâtiment déduit de l'adresse IP, ou recherche de l'adresse MAC sur les switchs.</li>
+                            <li>Planifier les interventions machine par machine.</li>
+                            <li>Valider dans la console la remontée de chaque agent (statut, connectivité) et tracer les actions.</li>
+                        </ol>
+                    </article>
+                    <article class="card card--highlight">
+                        <h2>Résultat</h2>
+                        <p>Les 64 machines remontent dans le bon site de la console. La procédure de contournement, validée avec le SSI, est documentée et réutilisable pour les prochains cas bloqués.</p>
+                    </article>
+                    <article class="card">
+                        <h2>Compétences mobilisées</h2>
+                        <ul class="bullet-list"><li>Sécurité des postes (EDR)</li><li>Diagnostic et recherche de solution</li><li>Travail avec le SSI et l'IT Group</li><li>Planification d'interventions</li><li>Traçabilité et documentation</li></ul>
+                    </article>
+                    <!-- Schéma de la démarche : pas de capture pour une réalisation en entreprise (documents internes non publiables) -->
+                    <article class="card span-full">
+                        <h2>En schéma</h2>
+                        <figure class="figure figure--flow">
+                            <ol class="flow"><li><span class="flow-step-num">01</span>Agent rattaché à l'<strong>ancien site</strong>, anti-altération active</li><li><span class="flow-step-num">02</span>Redémarrage en <strong>mode sans échec</strong></li><li><span class="flow-step-num">03</span><strong>Désinstallation forcée</strong> avec l'ancien token</li><li><span class="flow-step-num">04</span><strong>Réinstallation</strong> avec le nouveau Site Token</li><li><span class="flow-step-num">05</span>Agent visible dans le <strong>nouveau site</strong> de la console</li></ol>
+                            <figcaption>Procédure de contournement validée avec le service SSI, appliquée aux 64 machines.</figcaption>
+                        </figure>
+                    </article>
+                </div>
+
+                <!-- Liens vers la réalisation précédente et la suivante -->
+                <nav class="project-nav divided" aria-label="Autres réalisations">
+                <a href="projet1.html"><span class="eyebrow">← Précédente</span>GLPI + Active Directory</a>
+                <a class="next" href="projet3.html"><span class="eyebrow">Suivante →</span>Interconnexion pfSense</a>
+                </nav>
+            </div>
+        </section>
+    </main>
+
+    <site-footer></site-footer>
+
+    <script src="../../js/script.js"></script>
+</body>
+</html>

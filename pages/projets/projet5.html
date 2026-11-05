@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borne kiosque congés · Corentin QUINIO</title>
+    <meta name="description" content="Mettre à disposition des salariés un poste en libre-service qui n&#x27;affiche qu&#x27;une seule page web, celle de la prise de congés, simple à utiliser et impossible à détourner.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Portfolio de Corentin QUINIO">
+    <meta property="og:title" content="Borne kiosque congés · Corentin QUINIO">
+    <meta property="og:description" content="Mettre à disposition des salariés un poste en libre-service qui n&#x27;affiche qu&#x27;une seule page web, celle de la prise de congés, simple à utiliser et impossible à détourner.">
+    <link rel="icon" href="../../assets/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="../../js/layout.js"></script>
+</head>
+<body class="page-secondary">
+    <!-- En-tête et pied de page : écrits une seule fois dans js/layout.js -->
+    <site-header></site-header>
+
+    <main>
+        <section aria-labelledby="project-title">
+            <div class="container">
+                <a href="../projects.html" class="tag back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i>Toutes les réalisations</a>
+
+                <!-- En-tête de la fiche : présentation à gauche, faits clés à droite -->
+                <div class="split project-header">
+                    <div class="panel">
+                        <p class="kicker">Réalisation professionnelle</p>
+                        <i class="fas fa-tablet-screen-button icon-lg" aria-hidden="true"></i>
+                        <h1 id="project-title">Borne tactile en mode kiosque pour la prise de congés</h1>
+                        <p class="project-lead">Mettre à disposition des salariés un poste en libre-service qui n'affiche qu'une seule page web, celle de la prise de congés, simple à utiliser et impossible à détourner.</p>
+                    </div>
+                    <dl class="panel project-facts">
+                        <div class="tile"><dt class="eyebrow">Cadre</dt><dd>Alternance · Cordon Group</dd></div>
+                        <div class="tile"><dt class="eyebrow">Solution</dt><dd>Edge en mode kiosque</dd></div>
+                        <div class="tile"><dt class="eyebrow">Usage</dt><dd>Libre-service</dd></div>
+                    </dl>
+                </div>
+
+                <!-- Technologies utilisées -->
+                <ul class="tag-list project-tags" aria-label="Technologies utilisées"><li class="tag">Windows 11</li><li class="tag">Mode kiosque</li><li class="tag">Microsoft Edge</li><li class="tag">Autologon</li><li class="tag">Compte de service</li><li class="tag">GPO</li></ul>
+
+                <!-- Corps de la fiche : contexte, environnement, démarche, résultat, compétences -->
+                <div class="grid grid--2">
+                    <article class="card">
+                        <h2>Contexte &amp; problématique</h2>
+                        <p>Les salariés devaient pouvoir poser leurs congés eux-mêmes, depuis un poste en libre-service.</p>
+                        <p>La borne devait être simple (écran tactile, aucune manipulation), mais aussi sécurisée : impossible de sortir de la page, de naviguer ailleurs ou d'ouvrir une session.</p>
+                    </article>
+                    <article class="card">
+                        <h2>Environnement</h2>
+                        <ul class="bullet-list"><li>Poste Windows 11 dédié avec écran tactile</li><li>Compte de service aux droits minimum</li><li>Ouverture de session automatique (autologon)</li><li>Microsoft Edge en mode kiosque, URL unique</li></ul>
+                    </article>
+                    <article class="card span-full">
+                        <h2>Démarche</h2>
+                        <ol class="steps">
+                            <li>Préparer et durcir le poste Windows 11 (mises à jour, droits).</li>
+                            <li>Placer le poste dans l'OU dédiée aux bornes dans l'Active Directory.</li>
+                            <li>Créer le compte de service avec des droits minimum et configurer l'autologon.</li>
+                            <li>Configurer Edge en mode kiosque avec une seule URL autorisée.</li>
+                            <li>Tester sur l'écran tactile : navigation, retour à l'accueil, stabilité.</li>
+                            <li>Documenter la procédure et prévoir un mode maintenance pour l'équipe IT.</li>
+                        </ol>
+                    </article>
+                    <article class="card card--highlight">
+                        <h2>Résultat</h2>
+                        <p>La borne est en service : les salariés posent leurs congés en autonomie, et le poste ne donne accès à rien d'autre.</p>
+                    </article>
+                    <article class="card">
+                        <h2>Compétences mobilisées</h2>
+                        <ul class="bullet-list"><li>Durcissement d'un poste</li><li>Gestion des comptes et des droits</li><li>Configuration navigateur et OS</li><li>Documentation</li></ul>
+                    </article>
+                    <!-- Schéma de la démarche : pas de capture pour une réalisation en entreprise (documents internes non publiables) -->
+                    <article class="card span-full">
+                        <h2>En schéma</h2>
+                        <figure class="figure figure--flow">
+                            <ol class="flow"><li><span class="flow-step-num">01</span>Poste Windows 11 <strong>durci</strong>, rangé dans l'OU des bornes</li><li><span class="flow-step-num">02</span><strong>Compte de service</strong> aux droits minimum</li><li><span class="flow-step-num">03</span>Ouverture de session automatique (<strong>autologon</strong>)</li><li><span class="flow-step-num">04</span><strong>Edge en mode kiosque</strong>, une seule URL autorisée</li><li><span class="flow-step-num">05</span>Page de <strong>prise de congés</strong> sur l'écran tactile</li></ol>
+                            <figcaption>Du démarrage du poste à la page de congés, sans aucune autre application accessible.</figcaption>
+                        </figure>
+                    </article>
+                </div>
+
+                <!-- Liens vers la réalisation précédente et la suivante -->
+                <nav class="project-nav divided" aria-label="Autres réalisations">
+                <a href="projet4.html"><span class="eyebrow">← Précédente</span>Accès Citrix sécurisé</a>
+                <a class="next" href="projet6.html"><span class="eyebrow">Suivante →</span>Mini-SI d'entreprise</a>
+                </nav>
+            </div>
+        </section>
+    </main>
+
+    <site-footer></site-footer>
+
+    <script src="../../js/script.js"></script>
+</body>
+</html>

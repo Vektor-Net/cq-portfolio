@@ -1,0 +1,2474 @@
+/**
+ * ============================================================
+ * Portfolio de Corentin QUINIO — feuille de style unique
+ * ============================================================
+ *
+ * Organisation :
+ * - Toutes les valeurs (couleurs, espacements, arrondis, ombres) sont
+ *   définies une seule fois dans les variables de la partie 1.
+ * - Les parties 3 et 4 contiennent des blocs génériques réutilisés sur
+ *   toutes les pages (grilles, cartes, boutons, pastilles…).
+ * - Les parties suivantes ne contiennent que ce qui est propre à une page.
+ * Avant de créer une nouvelle classe, vérifier qu'un bloc générique ne
+ * fait pas déjà le travail.
+ *
+ * Sommaire :
+ *  1. Variables (charte graphique)
+ *  2. Base : remise à zéro et styles par défaut
+ *  3. Mise en page : conteneur, sections, grilles, colonnes
+ *  4. Composants : titres, libellés, pastilles, boutons, surfaces, icônes, listes
+ *  5. En-tête et navigation
+ *  6. Accueil : bandeau de présentation
+ *  7. Accueil : parcours (frise chronologique)
+ *  8. Accueil : compétences (cartes retournables)
+ *  9. Réalisations : cartes et tableau de synthèse E5
+ * 10. Réalisations : fiche détaillée
+ * 11. Page Entreprise
+ * 12. Page Veille
+ * 13. Page Contact
+ * 14. Pied de page
+ * 15. Adaptation aux écrans (tablette, mobile)
+ * 16. Animations et mouvement réduit
+ */
+
+/* ============================================================
+ * 1. VARIABLES (charte graphique)
+ * ============================================================ */
+:root {
+    /* --- Couleurs de base ---
+       Chaque couleur est écrite une seule fois, sous forme de canaux R, G, B.
+       Toutes les teintes du site en dérivent avec rgba(var(--rgb-…), opacité),
+       ce qui garantit une charte identique partout. Le script du fond animé
+       lit aussi ces valeurs. */
+    --rgb-cyan: 50, 197, 255;           /* #32C5FF : début des dégradés */
+    --rgb-blue: 94, 162, 255;           /* #5EA2FF : couleur principale */
+    --rgb-blue-light: 158, 197, 255;    /* #9EC5FF : survols, textes mis en avant */
+    --rgb-violet: 123, 108, 255;        /* #7B6CFF : couleur d'accent */
+    --rgb-violet-light: 185, 176, 255;  /* #B9B0FF : texte sur fond violet */
+    --rgb-red: 244, 63, 94;             /* #F43F5E : fin des dégradés */
+
+    --rgb-navy-950: 7, 11, 20;          /* #070B14 : fond de page */
+    --rgb-navy-900: 11, 16, 32;         /* #0B1020 : fond de page (bas du dégradé) */
+    --rgb-navy-850: 17, 24, 39;         /* #111827 : fond des cartes */
+    --rgb-navy-800: 26, 33, 53;         /* #1A2135 : fond des cartes en relief */
+    --rgb-plum-900: 30, 17, 30;         /* #1E111E : reflet rouge de l'en-tête */
+
+    --rgb-slate-light: 203, 213, 225;   /* #CBD5E1 : texte courant */
+    --rgb-slate: 163, 177, 198;         /* #A3B1C6 : bordures et textes discrets */
+    --rgb-white: 255, 255, 255;
+    --rgb-shadow: 2, 6, 23;             /* #020617 : couleur de toutes les ombres */
+
+    /* --- Couleurs utilisées dans le site --- */
+    --color-primary: rgb(var(--rgb-blue));
+    --color-primary-light: rgb(var(--rgb-blue-light));
+    --color-accent: rgb(var(--rgb-violet));
+    --color-accent-light: rgb(var(--rgb-violet-light));
+
+    --bg-page: rgb(var(--rgb-navy-950));
+    --bg-page-alt: rgb(var(--rgb-navy-900));
+    --bg-card: rgb(var(--rgb-navy-850));
+    --bg-card-raised: rgb(var(--rgb-navy-800));
+
+    /* Texte : trois niveaux seulement */
+    --text-primary: rgb(var(--rgb-white));   /* titres, valeurs importantes */
+    --text-body: rgb(var(--rgb-slate-light)); /* paragraphes */
+    --text-muted: rgb(var(--rgb-slate));     /* libellés, métadonnées */
+
+    /* Teintes transparentes (fonds d'icônes, pastilles, survols) */
+    --tint-primary: rgba(var(--rgb-blue), 0.08);
+    --tint-primary-strong: rgba(var(--rgb-blue), 0.14);
+    --tint-accent: rgba(var(--rgb-violet), 0.14);
+
+    /* Surfaces */
+    --surface-panel: linear-gradient(170deg, rgba(var(--rgb-navy-850), 0.9), rgba(var(--rgb-navy-900), 0.75));
+    --surface-inset: rgba(var(--rgb-navy-900), 0.6);
+    --surface-pill: rgba(var(--rgb-navy-950), 0.4);
+    --surface-glass: linear-gradient(145deg, rgba(var(--rgb-navy-950), 0.55), rgba(var(--rgb-navy-950), 0.3));
+    --surface-menu: rgba(var(--rgb-navy-950), 0.97);
+
+    /* Bordures */
+    --border-subtle: rgba(var(--rgb-slate), 0.18);
+    --border-panel: rgba(var(--rgb-slate), 0.26);
+    --border-accent: rgba(var(--rgb-blue), 0.35);
+    --border-accent-hover: rgba(var(--rgb-blue-light), 0.7);
+
+    /* Dégradés de la charte (cyan → bleu → violet → rouge).
+       --gradient-inline et --gradient-vertical ont les mêmes paliers que
+       TIMELINE_STOPS dans script.js (couleur des points de la frise). */
+    --gradient-main: linear-gradient(120deg, rgb(var(--rgb-cyan)) 0%, rgb(var(--rgb-blue)) 36%, rgb(var(--rgb-violet)) 68%, rgb(var(--rgb-red)) 100%);
+    --gradient-inline: linear-gradient(90deg, rgb(var(--rgb-cyan)) 0%, rgb(var(--rgb-blue)) 40%, rgb(var(--rgb-violet)) 70%, rgb(var(--rgb-red)) 100%);
+    /* Dégradé qui revient à sa couleur de départ : répété, il ne montre aucune cassure (traits animés) */
+    --gradient-loop: linear-gradient(90deg, rgb(var(--rgb-cyan)), rgb(var(--rgb-blue)), rgb(var(--rgb-violet)), rgb(var(--rgb-red)), rgb(var(--rgb-violet)), rgb(var(--rgb-blue)), rgb(var(--rgb-cyan)));
+    --gradient-vertical: linear-gradient(180deg, rgb(var(--rgb-cyan)) 0%, rgb(var(--rgb-blue)) 40%, rgb(var(--rgb-violet)) 70%, rgb(var(--rgb-red)) 100%);
+    --gradient-border: linear-gradient(135deg, rgba(var(--rgb-blue), 0.28), rgba(var(--rgb-violet), 0.18));
+    --gradient-border-hover: linear-gradient(135deg, rgba(var(--rgb-blue-light), 0.6), rgba(var(--rgb-violet), 0.4));
+    --gradient-header: linear-gradient(135deg, rgba(var(--rgb-navy-900), 0.94) 0%, rgba(var(--rgb-navy-850), 0.88) 55%, rgba(var(--rgb-plum-900), 0.88) 100%);
+
+    /* Halos lumineux en arrière-plan */
+    --glow-page:
+        radial-gradient(ellipse at 20% 50%, rgba(var(--rgb-blue), 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(var(--rgb-violet), 0.05) 0%, transparent 45%);
+    --glow-hero:
+        radial-gradient(circle at 24% 62%, rgba(var(--rgb-blue), 0.10) 0%, transparent 34%),
+        radial-gradient(circle at 72% 34%, rgba(var(--rgb-violet), 0.08) 0%, transparent 30%),
+        radial-gradient(ellipse at 50% 50%, rgba(var(--rgb-navy-950), 0.05) 20%, rgba(var(--rgb-navy-950), 0.62) 100%);
+    --glow-glass:
+        radial-gradient(circle at 15% 20%, rgba(var(--rgb-blue), 0.15), transparent 36%),
+        radial-gradient(circle at 82% 72%, rgba(var(--rgb-violet), 0.12), transparent 40%);
+
+    /* Ombres */
+    --shadow-card: inset 0 1px 0 rgba(var(--rgb-white), 0.04), 0 10px 26px rgba(var(--rgb-shadow), 0.22);
+    --shadow-card-hover: inset 0 1px 0 rgba(var(--rgb-white), 0.06), 0 14px 30px rgba(var(--rgb-shadow), 0.3);
+    --shadow-panel: 0 12px 28px rgba(var(--rgb-shadow), 0.28);
+    --shadow-header: 0 16px 40px rgba(var(--rgb-shadow), 0.45);
+    --shadow-glow: 0 14px 32px rgba(var(--rgb-violet), 0.28);
+    --shadow-glow-sm: 0 4px 16px rgba(var(--rgb-violet), 0.3);
+    --shadow-dot: 0 0 18px rgba(var(--rgb-violet), 0.55);
+    --shadow-line: 0 0 20px rgba(var(--rgb-violet), 0.35);
+    --shadow-logo: drop-shadow(0 8px 24px rgba(var(--rgb-shadow), 0.5));
+    --shadow-icon: drop-shadow(0 0 8px rgba(var(--rgb-blue), 0.5));
+
+    /* --- Espacements : une seule échelle pour tout le site --- */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.5rem;
+    --space-6: 2rem;
+    --space-7: 3rem;
+    --space-8: 4rem;
+    --gap: var(--space-5);              /* écart standard entre les cartes */
+
+    /* --- Arrondis --- */
+    --radius-sm: 6px;
+    --radius: 8px;
+    --radius-lg: 12px;
+    --radius-pill: 999px;               /* réservé aux éléments ronds (points, cercles) */
+
+    /* --- Typographie --- */
+    --font-body: 'Inter', sans-serif;
+    --font-title: 'Montserrat', sans-serif;
+    --font-code: 'Courier New', monospace;
+
+    /* --- Mise en page --- */
+    --header-h: 64px;                   /* hauteur de l'en-tête fixe */
+    --container: 1200px;                /* largeur maximale du contenu */
+
+    /* --- Animations --- */
+    --anim-slow: 8s;                    /* défilement des dégradés animés */
+    --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-card: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+/* ============================================================
+ * 2. BASE : remise à zéro et styles par défaut
+ * ============================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    /* Les ancres ne passent pas sous l'en-tête fixe */
+    scroll-padding-top: var(--header-h);
+}
+
+/* La page est une colonne : le pied de page reste en bas même si le contenu est court */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: linear-gradient(180deg, var(--bg-page) 0%, var(--bg-page-alt) 100%);
+}
+
+/* Halo lumineux fixe derrière tout le site */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: var(--glow-page);
+    pointer-events: none;
+}
+
+main {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+}
+
+/* Sur les pages autres que l'accueil, le contenu commence sous l'en-tête fixe */
+body.page-secondary main {
+    padding-top: var(--header-h);
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-title);
+    line-height: 1.25;
+    color: var(--text-primary);
+}
+
+p {
+    color: var(--text-body);
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-primary-light);
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+code {
+    padding: 0.1em 0.4em;
+    border-radius: 6px;
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    color: var(--color-primary-light);
+    background: var(--tint-primary);
+}
+
+/* Contour visible lors de la navigation au clavier */
+:focus-visible {
+    outline: 2px solid var(--color-primary-light);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* Texte lu par les lecteurs d'écran mais invisible à l'écran */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Icônes Font Awesome dessinées en contour (centre transparent) : signature du site.
+   :where() garde une spécificité nulle pour que chaque bloc puisse changer la taille. */
+:where(i[class*="fa-"]) {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0.9px var(--color-primary);
+    transition: -webkit-text-stroke-color 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+}
+
+:where(a:hover i[class*="fa-"]) {
+    -webkit-text-stroke-color: var(--color-primary-light);
+    filter: var(--shadow-icon);
+}
+
+/* Texte rempli avec le dégradé de la charte */
+.text-gradient {
+    background: var(--gradient-inline);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* ============================================================
+ * 3. MISE EN PAGE
+ * ============================================================ */
+
+/* Conteneur centré, largeur limitée */
+.container {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+}
+
+section {
+    position: relative;
+    padding: var(--space-8) 0;
+}
+
+/* Fine ligne de séparation au-dessus d'un bloc */
+.divided {
+    border-top: 1px solid var(--border-subtle);
+}
+
+/* Grilles : .grid + une variante pour le nombre de colonnes */
+.grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr); /* une colonne qui ne s'élargit pas selon son contenu (carrousels) */
+    gap: var(--gap);
+}
+
+.grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid--tight { gap: var(--space-4); }
+
+/* Élément qui occupe toute la largeur d'une grille */
+.span-full {
+    grid-column: 1 / -1;
+}
+
+/* Deux colonnes côte à côte (texte et visuel) */
+.split {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-7);
+    align-items: center;
+}
+
+/* Variante : colonne de gauche plus large, alignée en haut */
+.split--wide {
+    grid-template-columns: 1.4fr 1fr;
+    align-items: start;
+}
+
+/* ============================================================
+ * 4. COMPOSANTS
+ * ============================================================ */
+
+/* --- Titre de section avec trait dégradé dessous ---
+   h2 sur l'accueil, h1 en haut des autres pages. */
+.section-title {
+    position: relative;
+    margin-bottom: var(--space-7);
+    font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+    text-align: center;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    width: 80px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--gradient-inline);
+    box-shadow: var(--shadow-line);
+    transform: translateX(-50%);
+}
+
+/* Variante alignée à gauche */
+.section-title--left {
+    text-align: left;
+}
+
+.section-title--left::after {
+    left: 0;
+    transform: none;
+}
+
+/* Variante plus petite, pour un sous-bloc */
+.section-title--sm {
+    margin-bottom: var(--space-6);
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+}
+
+/* Phrase d'introduction centrée sous un titre */
+.section-intro {
+    max-width: 66ch;
+    margin: calc(-1 * var(--space-4)) auto var(--space-6);
+    text-align: center;
+}
+
+/* En-tête des pages secondaires : pastille + titre + phrase */
+.page-hero {
+    max-width: 760px;
+    margin: 0 auto var(--space-7);
+    text-align: center;
+}
+
+.page-hero .kicker {
+    margin-bottom: var(--space-4);
+}
+
+.page-hero .section-title {
+    margin-bottom: var(--space-6);
+}
+
+/* --- Petit libellé en capitales (« Formation », « Sources »…) --- */
+.eyebrow {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* --- Pastilles ---
+   .kicker : fond coloré, en capitales (type de page, type de réalisation)
+   .tag    : contour, pour les technologies et outils */
+.kicker,
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+.kicker {
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-primary-light);
+    background: var(--tint-primary-strong);
+}
+
+/* Variante violette : réalisations en lab */
+.kicker--accent {
+    color: var(--color-accent-light);
+    background: var(--tint-accent);
+}
+
+.tag {
+    border: 1px solid var(--border-accent);
+    color: var(--text-body);
+    background: var(--surface-pill);
+}
+
+a.tag:hover {
+    border-color: var(--border-accent-hover);
+    color: var(--text-primary);
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+/* --- Bordure dégradée ---
+   Technique commune aux boutons et aux cartes : deux fonds superposés,
+   l'un limité à l'intérieur (padding-box), l'autre visible sous la bordure
+   transparente (border-box). Chaque bloc règle simplement --fill et --edge. */
+.btn,
+.card {
+    --fill: linear-gradient(var(--bg-card), var(--bg-card));
+    border: 2px solid transparent;
+    background: var(--fill) padding-box, var(--edge) border-box;
+}
+
+/* --- Boutons --- */
+.btn {
+    --edge: var(--gradient-main);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0.7rem var(--space-5);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover {
+    --fill: linear-gradient(var(--bg-page-alt), var(--bg-page-alt));
+    --edge: var(--gradient-inline);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+/* Bouton secondaire : contour bleu uni et fond transparent.
+   Il n'utilise pas la bordure dégradée : avec un fond intérieur transparent,
+   le dégradé de bordure deviendrait visible sur toute la surface du bouton. */
+.btn--secondary {
+    border-color: var(--color-primary);
+    background: transparent;
+}
+
+.btn--secondary:hover {
+    border-color: var(--color-primary-light);
+    background: var(--tint-primary-strong);
+}
+
+/* Icône dans un bouton : trait blanc (currentColor vaut transparent avec la règle des icônes) */
+.btn i {
+    -webkit-text-stroke-color: var(--text-primary);
+}
+
+.btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+/* --- Surfaces ---
+   .card  : carte à bordure dégradée (contenu principal)
+   .panel : grand bloc qui regroupe plusieurs éléments
+   .tile  : petit encart discret, souvent à l'intérieur d'un .panel */
+.card {
+    --edge: var(--gradient-border);
+    position: relative;
+    padding: var(--space-5);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-card);
+}
+
+/* Carte mise en avant (ex. « Résultat » d'une fiche) : bordure dégradée pleine et fond teinté */
+.card--highlight {
+    --fill: linear-gradient(color-mix(in srgb, var(--bg-card) 88%, var(--color-primary)), color-mix(in srgb, var(--bg-card) 88%, var(--color-primary)));
+    --edge: var(--gradient-main);
+}
+
+/* Une carte cliquable se soulève au survol */
+a.card {
+    color: inherit;
+}
+
+a.card:hover {
+    --edge: var(--gradient-border-hover);
+    color: inherit;
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+}
+
+.panel {
+    padding: var(--space-6);
+    border: 1px solid var(--border-panel);
+    border-radius: var(--radius-lg);
+    background: var(--surface-panel);
+    box-shadow: var(--shadow-panel);
+}
+
+.tile {
+    padding: var(--space-4);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--surface-inset);
+}
+
+/* Typographie par défaut à l'intérieur des surfaces.
+   :where() ramène la spécificité de ces règles à celle d'une simple balise :
+   n'importe quelle classe (.eyebrow, .kpi-value, .project-slide h2…) peut donc
+   les remplacer sans conflit. */
+:where(.card, .panel) h2 {
+    margin-bottom: var(--space-4);
+    font-size: 1.15rem;
+}
+
+:where(.card, .panel, .tile) h3 {
+    margin-bottom: var(--space-2);
+    font-size: 1.05rem;
+}
+
+:where(.card, .tile) p {
+    font-size: 0.93rem;
+}
+
+:where(.card) p + p {
+    margin-top: var(--space-3);
+}
+
+:where(.card) .tag-list {
+    margin-top: var(--space-4);
+}
+
+/* --- Icônes --- */
+
+/* Grande icône posée au-dessus d'un titre */
+.icon-lg {
+    display: block;
+    margin-bottom: var(--space-4);
+    font-size: 2rem;
+}
+
+/* Icône dans un carré teinté */
+.icon-box {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-sm);
+    font-size: 1.35rem;
+    background: var(--tint-primary);
+}
+
+/* --- Icône à gauche, texte à droite (faits, contacts, chiffres clés) ---
+   Structure : icône, puis .eyebrow (libellé), .media-value (valeur), .media-detail (précision) */
+.media {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+}
+
+.media > i {
+    flex-shrink: 0;
+    width: 28px;
+    margin-top: 0.15rem;
+    font-size: 1.35rem;
+    text-align: center;
+}
+
+.media .eyebrow {
+    margin-bottom: var(--space-1);
+}
+
+.media-value {
+    display: block;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+a.media-value:hover {
+    color: var(--color-primary-light);
+}
+
+.media-detail {
+    display: block;
+    font-size: 0.88rem;
+    color: var(--text-body);
+}
+
+/* --- Listes --- */
+
+/* Liste à puces rondes bleues */
+.bullet-list {
+    display: grid;
+    gap: var(--space-2);
+}
+
+.bullet-list li {
+    position: relative;
+    padding-left: 1.3rem;
+    font-size: 0.93rem;
+    color: var(--text-body);
+}
+
+.bullet-list li::before {
+    content: '';
+    position: absolute;
+    top: 0.62em;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-primary);
+}
+
+/* Liste d'étapes numérotées dans des pastilles rondes */
+.steps {
+    display: grid;
+    gap: var(--space-3);
+    counter-reset: step;
+}
+
+/* Liste précédée d'une phrase d'introduction : même écart qu'entre deux paragraphes */
+:where(p) + :is(.steps, .bullet-list) {
+    margin-top: var(--space-4);
+}
+
+.steps li {
+    position: relative;
+    padding-left: 2.6rem;
+    font-size: 0.93rem;
+    color: var(--text-body);
+    counter-increment: step;
+}
+
+.steps li::before {
+    content: counter(step);
+    position: absolute;
+    top: -0.1rem;
+    left: 0;
+    display: grid;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border: 1px solid var(--border-accent);
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-primary-light);
+    background: var(--tint-primary);
+}
+
+/* --- Texte courant : paragraphes espacés et lisibles --- */
+.prose p {
+    line-height: 1.75;
+}
+
+.prose p + p,
+.prose p + ul,
+.prose ul + p {
+    margin-top: var(--space-4);
+}
+
+.prose strong {
+    color: var(--text-primary);
+}
+
+/* --- Image avec légende --- */
+.figure {
+    overflow: hidden;
+    border: 1px solid var(--border-panel);
+    border-radius: var(--radius);
+    background: var(--surface-inset);
+}
+
+.figure img {
+    width: 100%;
+}
+
+.figure figcaption {
+    padding: var(--space-3) var(--space-4);
+    font-size: 0.85rem;
+    color: var(--text-body);
+}
+
+/* --- Schéma en étapes (réalisations sans capture publiable) ---
+   Étapes numérotées reliées par des flèches : en ligne sur grand écran,
+   en colonne sur mobile (partie 15). S'utilise dans .figure--flow. */
+.figure--flow {
+    background: var(--surface-inset);
+}
+
+.flow {
+    display: grid;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+    gap: var(--space-6);
+    padding: var(--space-5);
+}
+
+.flow li {
+    position: relative;
+    padding: var(--space-4);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--bg-card);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-body);
+}
+
+.flow li strong {
+    color: var(--text-primary);
+}
+
+/* Dernière étape : le résultat, mis en avant */
+.flow li:last-child {
+    border-color: var(--border-accent);
+    background: var(--tint-primary);
+}
+
+/* Flèche entre deux étapes, dans l'espace qui les sépare */
+.flow li + li::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: calc(-1 * var(--space-6) + var(--space-2));
+    width: calc(var(--space-6) - 2 * var(--space-2));
+    height: 2px;
+    background: var(--gradient-inline);
+}
+
+.flow li + li::after {
+    content: '';
+    position: absolute;
+    top: calc(50% - 4px);
+    left: calc(-1 * var(--space-2) - 6px);
+    border: 5px solid transparent;
+    border-left-color: var(--color-accent);
+}
+
+.flow-step-num {
+    display: block;
+    margin-bottom: var(--space-2);
+    font-family: var(--font-title);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--color-primary);
+}
+
+/* --- Carrousel ---
+   Un bloc [data-carousel] contient une piste .carousel-track qui défile
+   horizontalement, des flèches .carousel-btn et, en option, un compteur
+   [data-carousel-count] et une barre .carousel-progress (script.js). */
+.carousel-controls {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.carousel-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border-accent);
+    border-radius: 50%;
+    background: var(--tint-primary);
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.carousel-btn:hover:not(:disabled) {
+    border-color: var(--border-accent-hover);
+    background: var(--tint-primary-strong);
+    transform: translateY(-1px);
+}
+
+/* Début ou fin de la piste atteint */
+.carousel-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+/* Barre de progression : --progress va de 0 à 1 */
+.carousel-progress {
+    height: 2px;
+    margin-top: var(--space-4);
+    border-radius: 2px;
+    background: var(--border-subtle);
+    overflow: hidden;
+}
+
+.carousel-progress span {
+    display: block;
+    height: 100%;
+    background: var(--gradient-inline);
+    transform: scaleX(var(--progress, 0));
+    transform-origin: left;
+    transition: transform 0.15s linear;
+}
+
+/* ============================================================
+ * 5. EN-TÊTE ET NAVIGATION
+ * ============================================================ */
+
+/* Balises <site-header> et <site-footer> (js/layout.js) : simples enveloppes,
+   sans effet sur la mise en page ; seuls <header> et <footer> comptent. */
+site-header,
+site-footer {
+    display: contents;
+}
+
+/* En-tête fixé en haut, fond semi-transparent flouté */
+header {
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    height: var(--header-h);
+    background: var(--gradient-header);
+    box-shadow: var(--shadow-header);
+    backdrop-filter: blur(15px);
+}
+
+/* Trait dégradé animé sous l'en-tête */
+header::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: var(--gradient-loop);
+    background-size: 200% 100%;
+    animation: gradientSlide var(--anim-slow) linear infinite;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: var(--container);
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+}
+
+/* Logo texte « CQ ◆ Portfolio » */
+.nav-title a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--text-primary);
+    transition: transform 0.3s var(--ease-bounce);
+}
+
+.nav-title a:hover {
+    color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+/* Petit losange dégradé entre « CQ » et « Portfolio » */
+.nav-title-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--gradient-inline);
+    transform: rotate(45deg);
+}
+
+/* Liens du menu : texte simple, sans cadre. La page active garde la patte du site
+   (texte en dégradé et fin trait dégradé dessous) sans encadré ni fond. */
+.nav-links {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.nav-links a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0.45rem var(--space-3);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: color 0.25s ease;
+}
+
+.nav-links a i {
+    font-size: 1rem;
+    transition: transform 0.4s var(--ease-bounce), -webkit-text-stroke-color 0.25s ease;
+}
+
+.nav-links a:hover {
+    color: var(--text-primary);
+}
+
+.nav-links a:hover i {
+    transform: translateY(-2px) scale(1.1);
+}
+
+/* Page active : texte en dégradé, icône teintée, trait dégradé de 2 px sous le texte */
+.nav-links a.active span {
+    background: var(--gradient-inline);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+
+.nav-links a.active i {
+    -webkit-text-stroke-color: var(--color-primary-light);
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    right: var(--space-3);
+    bottom: 0;
+    left: var(--space-3);
+    height: 2px;
+    border-radius: var(--radius-pill);
+    background: var(--gradient-inline);
+}
+
+.nav-links a:focus-visible {
+    outline: 2px solid var(--color-primary-light);
+    outline-offset: 2px;
+}
+
+/* Bouton du menu mobile (trois traits qui se transforment en croix) */
+.burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: var(--space-2);
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.burger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--text-primary);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ============================================================
+ * 6. ACCUEIL : BANDEAU DE PRÉSENTATION
+ * ============================================================ */
+
+/* Bandeau plein écran, contenu centré */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: min(100vh, 720px);
+    padding: calc(var(--header-h) + var(--space-7)) 0 var(--space-7);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Pluie de caractères animée (dessinée par script.js) */
+.hero-matrix {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    opacity: 0.45;
+    /* Fondu vers le bas pour éviter une coupure nette avec la section suivante */
+    mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
+}
+
+/* Halos colorés par-dessus la pluie de caractères */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--glow-hero);
+    pointer-events: none;
+}
+
+/* Trait dégradé en bas du bandeau */
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: min(420px, 42vw);
+    height: 2px;
+    background: var(--gradient-inline);
+    box-shadow: var(--shadow-line);
+    transform: translateX(-50%);
+}
+
+/* Carte vitrée (s'utilise avec .panel, dont elle remplace le fond) */
+.hero-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-7);
+    width: min(1080px, 100% - 2 * var(--space-6));
+    padding: clamp(var(--space-5), 3vw, 2.6rem);
+    background: var(--surface-glass), var(--glow-glass);
+    backdrop-filter: blur(12px);
+}
+
+.hero-text {
+    flex: 1.8;
+}
+
+.hero-text h1 {
+    margin-bottom: var(--space-2);
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    line-height: 1.1;
+}
+
+/* Sous-titre écrit lettre par lettre ; le curseur suit le dernier caractère */
+.typing-line {
+    min-height: 2.2em;
+    margin-bottom: var(--space-4);
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+}
+
+.typing-text::after {
+    content: none; /* curseur retiré : le texte s'écrit sans effet gadget */
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    margin-left: 4px;
+    vertical-align: -0.15em;
+    background: var(--color-primary);
+    animation: blink 0.8s infinite;
+}
+
+.hero-lead {
+    max-width: 46ch;
+    margin-bottom: var(--space-6);
+}
+
+.hero-lead strong {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.hero-image {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+
+/* Cercle au contour dégradé animé, autour de la photo ou du monogramme */
+.photo-frame {
+    display: inline-flex;
+    padding: 3px;
+    border-radius: 50%;
+    background: var(--gradient-loop);
+    background-size: 200% 100%;
+    box-shadow: var(--shadow-glow);
+    animation: gradientSlide var(--anim-slow) linear infinite;
+}
+
+.photo-frame img,
+.monogram {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Initiales « CQ » affichées en attendant une photo */
+.monogram {
+    display: grid;
+    place-items: center;
+    font-family: var(--font-title);
+    font-size: 5rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    background: var(--glow-glass), var(--bg-page-alt);
+}
+
+/* ============================================================
+ * 7. ACCUEIL : PARCOURS (frise chronologique)
+ * ============================================================
+ * Sur grand écran : frise horizontale, libellés alternés au-dessus et
+ * au-dessous de la ligne. Survoler ou cliquer un point le sélectionne
+ * (.is-open, script.js) : son détail s'affiche de l'autre côté de la ligne.
+ * Sur mobile (partie 15) : frise verticale, le détail se déplie sous le libellé.
+ * Chaque étape prend la couleur de la ligne à sa position : script.js
+ * la calcule et la range dans --dot-rgb, sur .timeline-node. */
+.timeline-row + .timeline-row {
+    margin-top: var(--space-6);
+}
+
+.timeline-row > h3 {
+    font-size: 1.3rem;
+}
+
+/* Grande marge verticale pour laisser la place aux libellés */
+.timeline-track {
+    --dot-size: 22px;
+    position: relative;
+    padding: 8rem var(--space-3);
+}
+
+/* Ligne horizontale de la frise */
+.timeline-track::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: var(--space-2);
+    left: var(--space-2);
+    height: 3px;
+    border-radius: 2px;
+    background: var(--gradient-inline);
+    opacity: 0.85;
+    transform: translateY(-50%);
+}
+
+.timeline-points {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    gap: var(--space-4);
+}
+
+.timeline-node {
+    --dot-rgb: var(--rgb-blue); /* valeur de secours, remplacée par script.js */
+    position: relative;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+
+/* Point d'étape : anneau de la couleur de la ligne à cet endroit, centre
+   sombre. Le cerne couleur de panneau détache le point de la ligne. */
+.timeline-dot {
+    position: relative;
+    z-index: 1;
+    width: var(--dot-size);
+    height: var(--dot-size);
+    padding: 0;
+    border: 2px solid rgb(var(--dot-rgb));
+    border-radius: 50%;
+    background: var(--bg-card);
+    box-shadow: 0 0 0 4px var(--bg-card);
+    cursor: pointer;
+    transition: transform 0.3s var(--ease-bounce), background-color 0.25s ease, box-shadow 0.3s ease;
+}
+
+/* Point ouvert ou survolé : il se remplit, grossit et s'allume */
+.timeline-node.is-open .timeline-dot,
+.timeline-dot:focus-visible {
+    background: rgb(var(--dot-rgb));
+    transform: scale(1.25);
+    box-shadow: 0 0 0 4px var(--bg-card), 0 0 18px rgba(var(--dot-rgb), 0.6);
+}
+
+.timeline-dot:focus-visible {
+    outline: 2px solid rgb(var(--dot-rgb));
+    outline-offset: 6px;
+}
+
+.timeline-label {
+    position: absolute;
+    left: 50%;
+    text-align: center;
+    width: max-content;
+    max-width: 250px;
+    transform: translateX(-50%);
+}
+
+/* Une étape sur deux au-dessus de la ligne, l'autre au-dessous */
+.timeline-node:nth-child(odd) .timeline-label { bottom: calc(50% + 22px); }
+.timeline-node:nth-child(even) .timeline-label { top: calc(50% + 22px); }
+
+.timeline-label h4 {
+    display: inline-block;
+    margin-bottom: var(--space-1);
+    font-size: 0.98rem;
+    font-weight: 600;
+}
+
+.timeline-role {
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+/* Les dates restent blanches pour être lues en premier */
+.timeline-label .eyebrow {
+    margin-top: var(--space-1);
+    color: var(--text-primary);
+}
+
+/* Détail : texte simple, de l'autre côté de la ligne par rapport au libellé
+   (la place y est libre). Il apparaît quand l'étape est sélectionnée. */
+.timeline-detail {
+    position: absolute;
+    left: 50%;
+    width: min(250px, 100%);
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.timeline-node:nth-child(odd) .timeline-detail {
+    top: calc(50% + 22px);
+    transform: translate(-50%, 6px);
+}
+
+.timeline-node:nth-child(even) .timeline-detail {
+    bottom: calc(50% + 22px);
+    transform: translate(-50%, -6px);
+}
+
+.timeline-node.is-open .timeline-detail {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.timeline-detail p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* ============================================================
+ * 8. ACCUEIL : COMPÉTENCES (cartes retournables)
+ * ============================================================ */
+.skills-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+}
+
+/* Onglet = bouton .btn en minuscules ; l'onglet actif garde l'aspect « survolé » */
+.skills-tab {
+    --edge: var(--gradient-border-hover);
+    font-size: 0.92rem;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.skills-tab[aria-selected="true"] {
+    --fill: linear-gradient(var(--bg-page-alt), var(--bg-page-alt));
+    --edge: var(--gradient-inline);
+    box-shadow: var(--shadow-glow);
+}
+
+.skills-panel {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.skills-panel[hidden] {
+    display: none;
+}
+
+/* Carte retournable : les deux faces occupent la même case de grille,
+   la carte prend donc automatiquement la hauteur de la face la plus haute. */
+.flip-card {
+    border-radius: var(--radius);
+    perspective: 1200px;
+    cursor: pointer;
+}
+
+.flip-inner {
+    display: grid;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+}
+
+/* Retournement : au survol à la souris, ou via la classe .is-flipped
+   ajoutée par script.js (tap sur écran tactile, touche Entrée ou Espace) */
+.flip-card:hover .flip-inner,
+.flip-card.is-flipped .flip-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-face {
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 230px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Face avant : icône, titre et pastilles centrés */
+.flip-front {
+    align-items: center;
+    text-align: center;
+}
+
+.flip-front .icon-lg {
+    font-size: 2.6rem;
+    filter: var(--shadow-icon);
+}
+
+.flip-front .tag-list {
+    justify-content: center;
+}
+
+/* Face arrière : déjà tournée de 180°, fond légèrement plus clair */
+.flip-back {
+    --fill: linear-gradient(160deg, var(--bg-card), var(--bg-card-raised));
+    --edge: var(--gradient-border-hover);
+    transform: rotateY(180deg);
+}
+
+.flip-back h3 {
+    color: var(--color-primary-light);
+}
+
+/* Petite flèche circulaire qui indique que la carte se retourne */
+.flip-hint {
+    position: absolute;
+    right: var(--space-4);
+    bottom: var(--space-3);
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+/* ============================================================
+ * 9. RÉALISATIONS : CARTES ET TABLEAU DE SYNTHÈSE E5
+ * ============================================================ */
+
+/* Grille des réalisations : une carte sobre par réalisation, toutes visibles d'un coup
+   pour que le jury voie l'ensemble sans faire défiler. */
+.project-rail-wrap {
+    margin-bottom: var(--space-8);
+}
+
+.project-rail {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: var(--gap);
+    list-style: none;
+}
+
+/* Diapositive : surface plate, filet discret, couleur selon le cadre
+   (bleu = entreprise, violet = lab) qui n'apparaît qu'au survol */
+.project-slide {
+    --accent-rgb: var(--rgb-blue);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 280px;
+    padding: var(--space-5);
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--surface-inset);
+    color: var(--text-body);
+    transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+}
+
+.project-slide--lab {
+    --accent-rgb: var(--rgb-violet);
+}
+
+.project-slide:hover,
+.project-slide:focus-visible {
+    border-color: rgba(var(--accent-rgb), 0.55);
+    background: rgba(var(--accent-rgb), 0.06);
+    color: var(--text-body);
+    transform: translateY(-4px);
+}
+
+/* Grand numéro en contour, en tête de diapositive */
+.project-slide-num {
+    margin-bottom: var(--space-4);
+    font-family: var(--font-title);
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(var(--accent-rgb), 0.8);
+    transition: -webkit-text-stroke-color 0.3s ease;
+}
+
+.project-slide:hover .project-slide-num {
+    -webkit-text-stroke-color: rgb(var(--accent-rgb));
+}
+
+/* Cadre : point de couleur + texte discret */
+.project-slide-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.project-slide-meta::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgb(var(--accent-rgb));
+}
+
+.project-slide h2 {
+    margin-bottom: var(--space-3);
+    font-size: 1.2rem;
+    line-height: 1.35;
+    color: var(--text-primary);
+}
+
+.project-slide p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+.project-slide-tags {
+    margin-top: auto;
+    padding-top: var(--space-5);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.project-slide .link-more {
+    color: rgb(var(--accent-rgb));
+}
+
+/* Lien « Voir le détail → » */
+.link-more {
+    margin-top: var(--space-3);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+a:hover .link-more {
+    color: var(--color-primary-light);
+}
+
+/* Le tableau défile horizontalement sur petit écran (s'utilise avec .panel) */
+.table-scroll {
+    position: relative; /* garde les textes .visually-hidden du tableau dans la zone qui défile */
+    padding: 0;
+    overflow-x: auto;
+}
+
+.e5-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.e5-table th,
+.e5-table td {
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-body);
+    text-align: center;
+}
+
+/* En-têtes de colonnes : intitulés des compétences */
+.e5-table thead th {
+    font-family: var(--font-title);
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text-primary);
+    vertical-align: bottom;
+}
+
+/* Première colonne : nom de la réalisation */
+.e5-table tbody th {
+    font-weight: 600;
+    text-align: left;
+}
+
+.e5-table tbody th a {
+    color: var(--text-primary);
+}
+
+.e5-table tbody th a:hover {
+    color: var(--color-primary-light);
+}
+
+.e5-table tbody tr:last-child > * {
+    border-bottom: none;
+}
+
+.e5-table tbody tr:hover {
+    background: var(--tint-primary);
+}
+
+/* Coche indiquant qu'une compétence est mobilisée */
+.e5-check {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background: var(--gradient-inline);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 6.5'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 6.5'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* ============================================================
+ * 10. RÉALISATIONS : FICHE DÉTAILLÉE
+ * ============================================================ */
+
+/* Lien de retour (s'utilise avec .tag) */
+.back-link {
+    margin-bottom: var(--space-5);
+    padding: var(--space-2) var(--space-4);
+    font-size: 0.85rem;
+}
+
+/* En-tête de fiche : présentation à gauche, faits clés à droite (s'utilise avec .split) */
+.project-header {
+    align-items: stretch;
+    gap: var(--gap);
+    margin-bottom: var(--space-5);
+}
+
+.project-header h1 {
+    margin-bottom: var(--space-4);
+    font-size: clamp(1.5rem, 2.6vw, 1.95rem);
+}
+
+.project-header .kicker {
+    margin-bottom: var(--space-4);
+}
+
+.project-lead {
+    font-size: 1.02rem;
+    line-height: 1.7;
+}
+
+.project-facts {
+    display: grid;
+    align-content: center;
+    gap: var(--space-3);
+}
+
+.project-facts dd {
+    margin-top: var(--space-1);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.project-tags {
+    margin-bottom: var(--space-7);
+}
+
+/* Liens vers la réalisation précédente et la suivante */
+.project-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-top: var(--space-7);
+    padding-top: var(--space-5);
+}
+
+.project-nav a {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    max-width: 48%;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.project-nav a:hover {
+    color: var(--color-primary-light);
+}
+
+/* Le lien « Suivante » reste à droite même quand il est seul */
+.project-nav .next {
+    margin-left: auto;
+    text-align: right;
+}
+
+/* ============================================================
+ * 11. PAGE ENTREPRISE
+ * ============================================================ */
+.company-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-5);
+    margin-bottom: var(--space-7);
+    text-align: center;
+}
+
+.company-logo {
+    width: min(200px, 55vw);
+    filter: var(--shadow-logo);
+}
+
+/* Carte du monde : continents blancs adoucis pour le thème sombre */
+.figure img[src*="cordon-group-monde"] {
+    filter: brightness(0.82) saturate(0.95);
+}
+
+.company-hero > p {
+    max-width: 62ch;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+/* Rangée des chiffres clés sous le logo */
+.company-hero .grid {
+    width: 100%;
+    margin-top: var(--space-4);
+    text-align: left;
+}
+
+/* Chiffre clé d'une carte .media */
+.kpi-value {
+    display: block;
+    font-family: var(--font-title);
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text-primary);
+}
+
+/* Bloc de la page séparé du précédent (s'utilise avec .divided) */
+.company-block {
+    padding: var(--space-7) 0;
+}
+
+/* Rangée d'icônes des domaines d'activité */
+.domains {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-5);
+    margin-top: var(--space-5);
+}
+
+.domains li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.domains i {
+    font-size: 1.6rem;
+}
+
+/* Petit encart chiffré (taille des équipes informatiques) */
+.stat {
+    text-align: center;
+}
+
+.stat strong {
+    display: block;
+    font-family: var(--font-title);
+    font-size: 1.6rem;
+    color: var(--text-primary);
+}
+
+.stat span {
+    font-size: 0.85rem;
+    color: var(--text-body);
+}
+
+.split .stat-grid {
+    margin-top: var(--space-5);
+}
+
+/* Liste des outils utilisés au quotidien */
+.tools {
+    margin-top: var(--space-6);
+    text-align: center;
+}
+
+.tools .eyebrow {
+    margin-bottom: var(--space-3);
+}
+
+.tools .tag-list {
+    justify-content: center;
+}
+
+/* ============================================================
+ * 12. PAGE VEILLE
+ * ============================================================ */
+
+/* Titre d'un sujet de veille, précédé de son icône */
+.topic-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+}
+
+.topic-head h2 {
+    margin: 0;
+    font-size: 1.35rem;
+}
+
+.topic-head i {
+    font-size: 1.5rem;
+}
+
+.topic-question {
+    max-width: 75ch;
+    margin-bottom: var(--space-5);
+}
+
+.topic-pillars {
+    margin-bottom: var(--space-6);
+}
+
+/* Ligne « Sources » + flèches du carrousel */
+.sources-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-3);
+}
+
+/* Carrousel horizontal : 4 cartes visibles, défilement par glisser ou par les flèches */
+.article-carousel {
+    display: grid;
+    grid-auto-columns: minmax(250px, calc((100% - 3 * var(--space-3)) / 4));
+    grid-auto-flow: column;
+    gap: var(--space-3);
+    padding-bottom: var(--space-2);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-color: var(--border-accent) var(--surface-inset);
+    scrollbar-width: thin;
+}
+
+/* Carte de source (s'utilise avec .tile) : le lien reste collé en bas */
+.article-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 190px;
+    scroll-snap-align: start;
+}
+
+.article-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.article-card h3 {
+    font-size: 0.98rem;
+}
+
+.article-card a {
+    margin-top: auto;
+    padding-top: var(--space-3);
+}
+
+/* Encadré « Ce que j'en retiens » (s'utilise avec .tile) */
+.takeaway {
+    margin-top: var(--space-5);
+    border-left: 3px solid var(--color-primary);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.takeaway strong {
+    color: var(--text-primary);
+}
+
+/* ============================================================
+ * 13. PAGE CONTACT
+ * ============================================================ */
+/* Formulaire à gauche, informations à droite (une colonne sur mobile, partie 15) */
+.contact-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: var(--gap);
+    align-items: start;
+}
+
+.contact-form .section-title {
+    margin-bottom: var(--space-6);
+}
+
+/* Champ : libellé, zone de saisie, message d'erreur */
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.field label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.field input,
+.field textarea {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--border-panel);
+    border-radius: var(--radius-sm);
+    background: var(--surface-inset);
+    font: inherit;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.field textarea {
+    min-height: 160px;
+    resize: vertical;
+}
+
+.field input:hover,
+.field textarea:hover {
+    border-color: var(--border-accent);
+}
+
+.field input:focus-visible,
+.field textarea:focus-visible {
+    outline: none;
+    border-color: var(--color-primary);
+    background: var(--tint-primary);
+    box-shadow: 0 0 0 3px var(--tint-primary-strong);
+}
+
+/* Champ invalide, signalé par script.js après une tentative d'envoi */
+.field [aria-invalid="true"] {
+    border-color: rgb(var(--rgb-red));
+}
+
+.field-error {
+    min-height: 1.2em;
+    font-size: 0.8rem;
+    color: rgb(var(--rgb-red));
+}
+
+.contact-form-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+}
+
+.contact-form .btn[disabled] {
+    opacity: 0.6;
+    cursor: progress;
+}
+
+/* Résultat de l'envoi : vert si réussi, rouge sinon */
+.form-status {
+    font-size: 0.9rem;
+}
+
+.form-status.is-success {
+    color: var(--color-primary-light);
+}
+
+.form-status.is-error {
+    color: rgb(var(--rgb-red));
+}
+
+/* Information RGPD sous le formulaire : discrète mais lisible */
+.form-note {
+    margin-top: var(--space-4);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.contact-side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.contact-list {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.contact-side .btn {
+    align-self: flex-start;
+}
+
+.contact-note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* ============================================================
+ * 14. PIED DE PAGE
+ * ============================================================ */
+footer {
+    position: relative;
+    z-index: 1;
+    padding: var(--space-4) 0;
+    border-top: 1px solid var(--border-subtle);
+    text-align: center;
+}
+
+footer p {
+    font-size: 0.85rem;
+}
+
+/* ============================================================
+ * 15. ADAPTATION AUX ÉCRANS
+ * ============================================================ */
+
+/* --- Tablette (jusqu'à 1024 px) : grilles sur deux colonnes --- */
+@media (max-width: 1024px) {
+    .grid--4,
+    .grid--3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    /* Liens du menu resserrés pour tenir à côté du logo jusqu'à 861 px */
+    .nav-links a {
+        padding: 0.45rem var(--space-3);
+    }
+}
+
+/* --- Petite tablette (jusqu'à 860 px) : menu repliable, une colonne --- */
+@media (max-width: 860px) {
+    /* Menu déroulant sous l'en-tête, ouvert par le bouton burger */
+    .nav-links {
+        position: absolute;
+        top: var(--header-h);
+        right: 0;
+        left: 0;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-2);
+        padding: var(--space-6) var(--space-5) var(--space-7);
+        border: none;
+        border-bottom: 1px solid var(--border-subtle);
+        border-radius: 0;
+        background: var(--surface-menu);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition: transform 0.25s ease, opacity 0.25s ease, visibility 0.25s;
+    }
+
+    .nav-links.is-open {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+
+    /* Liens plus grands et plus lisibles quand ils occupent tout le panneau */
+    .nav-links a {
+        font-size: 1rem;
+        color: var(--text-primary);
+    }
+
+    .burger {
+        display: flex;
+    }
+
+    /* Bandeau : monogramme au-dessus du texte, tout centré */
+    .hero-card {
+        flex-direction: column-reverse;
+        gap: var(--space-5);
+        text-align: center;
+    }
+
+    .hero-lead {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .hero-card .btn-row {
+        justify-content: center;
+    }
+
+    .photo-frame img,
+    .monogram {
+        width: 170px;
+        height: 170px;
+    }
+
+    .monogram {
+        font-size: 3.4rem;
+    }
+
+    .split,
+    .split--wide,
+    .grid--2 {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .split {
+        gap: var(--space-6);
+    }
+
+    /* Frise verticale : ligne à gauche, détail replié sous le libellé */
+    .timeline-track {
+        padding: var(--space-5) 0 0;
+    }
+
+    .timeline-track::before {
+        top: var(--space-5);
+        right: auto;
+        bottom: 0;
+        left: calc(var(--dot-size) / 2 - 1px); /* centrée sous les points */
+        width: 2px;
+        height: auto;
+        background: var(--gradient-vertical);
+        transform: none;
+    }
+
+    .timeline-points {
+        flex-direction: column;
+        gap: var(--space-5);
+    }
+
+    .timeline-node {
+        display: block;
+        padding-left: var(--space-6);
+    }
+
+    .timeline-dot {
+        position: absolute;
+        top: 0.25rem;
+        left: 0;
+    }
+
+    .timeline-label,
+    .timeline-node:nth-child(odd) .timeline-label,
+    .timeline-node:nth-child(even) .timeline-label {
+        position: static;
+        width: auto;
+        max-width: none;
+        text-align: left;
+        transform: none;
+    }
+
+    .contact-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* Schéma en étapes : en colonne, flèches verticales */
+    .flow {
+        grid-auto-flow: row;
+        gap: var(--space-5);
+    }
+
+    .flow li + li::before {
+        top: calc(-1 * var(--space-5) + var(--space-1));
+        left: var(--space-5);
+        width: 2px;
+        height: calc(var(--space-5) - 2 * var(--space-1));
+        background: var(--gradient-vertical);
+    }
+
+    .flow li + li::after {
+        top: calc(-1 * var(--space-1) - 6px);
+        left: calc(var(--space-5) - 4px);
+        border-color: transparent;
+        border-top-color: var(--color-accent);
+    }
+
+    /* Détail replié : il se déplie sous le libellé quand le point est ouvert */
+    .timeline-detail,
+    .timeline-node:nth-child(odd) .timeline-detail,
+    .timeline-node:nth-child(even) .timeline-detail {
+        position: static;
+        width: auto;
+        max-height: 0;
+        overflow: hidden;
+        text-align: left;
+        opacity: 0;
+        transform: none;
+        transition: max-height 0.3s ease, opacity 0.25s ease, margin-top 0.3s ease;
+    }
+
+    .timeline-node.is-open .timeline-detail {
+        max-height: 12rem;
+        margin-top: var(--space-1);
+        opacity: 1;
+    }
+}
+
+/* --- Mobile (jusqu'à 640 px) : marges réduites, une seule colonne partout --- */
+@media (max-width: 640px) {
+    .project-slide {
+        min-height: 0;
+    }
+
+    /* Tableau E5 : une carte par réalisation, avec seulement les compétences cochées
+       (le libellé vient de l'attribut data-label de chaque cellule) */
+    .e5-table {
+        min-width: 0;
+    }
+
+    .e5-table thead {
+        display: none;
+    }
+
+    .e5-table tbody tr {
+        display: block;
+        padding: var(--space-4);
+        border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .e5-table tbody th,
+    .e5-table td {
+        display: block;
+        padding: 0;
+        border: none;
+        text-align: left;
+    }
+
+    .e5-table td:nth-of-type(1) {
+        margin-bottom: var(--space-2);
+        font-size: 0.8rem;
+        color: var(--text-muted);
+    }
+
+    .e5-table td:not(:nth-of-type(1)):not(:has(.e5-check)) {
+        display: none;
+    }
+
+    .e5-table td:has(.e5-check) {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        padding: var(--space-1) 0;
+    }
+
+    .e5-table td:has(.e5-check)::after {
+        content: attr(data-label);
+        font-size: 0.88rem;
+    }
+
+    :root {
+        --header-h: 58px;
+        --gap: var(--space-4);
+    }
+
+    .container,
+    nav {
+        padding: 0 var(--space-4);
+    }
+
+    section {
+        padding: var(--space-7) 0;
+    }
+
+    .panel {
+        padding: var(--space-5) var(--space-4);
+    }
+
+    .hero-card {
+        width: calc(100% - 2 * var(--space-4));
+    }
+
+    .grid--4,
+    .grid--3 {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* Une carte presque pleine largeur, la suivante dépasse pour inviter à glisser */
+    .article-carousel {
+        grid-auto-columns: 84%;
+    }
+
+    .project-nav {
+        flex-direction: column;
+    }
+
+    .project-nav a {
+        max-width: none;
+        text-align: left;
+    }
+
+    .project-nav .next {
+        text-align: right;
+    }
+}
+
+/* ============================================================
+ * 16. ANIMATIONS ET MOUVEMENT RÉDUIT
+ * ============================================================ */
+
+/* Défilement d'un dégradé (trait de l'en-tête, cadre du monogramme).
+   S'utilise avec --gradient-loop et background-size: 200% : le motif se
+   décale d'exactement sa propre largeur, la fin de boucle tombe donc
+   pile sur le début, sans saut. */
+@keyframes gradientSlide {
+    from { background-position: 0% center; }
+    to { background-position: -200% center; }
+}
+
+/* Clignotement du curseur du sous-titre */
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Apparition d'un onglet de compétences */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: none; }
+}
+
+/* --- Écran d'arrivée (accueil, une fois par session) ---
+   Déroulé : « CQ » se resserre et se précise, le losange apparaît,
+   « Portfolio » se dévoile, le trait se trace, puis l'écran s'efface
+   et laisse la place au bandeau. Un clic le passe (classe is-skipped). */
+.intro {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    background: var(--bg-page);
+    cursor: pointer;
+    animation: introOut 0.7s ease-in 1.5s forwards;
+}
+
+.intro.is-skipped {
+    animation: introOut 0.3s ease-in forwards;
+}
+
+/* Déjà vu dans cette session (classe posée par layout.js) */
+.intro-seen .intro {
+    display: none;
+}
+
+.intro-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-title);
+    font-size: clamp(2.2rem, 7vw, 3.6rem);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.intro-cq {
+    background: var(--gradient-inline);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: introCq 0.7s ease-out both;
+}
+
+.intro-dot {
+    width: 0.3em;
+    height: 0.3em;
+    background: var(--gradient-inline);
+    rotate: 45deg;
+    animation: introPop 0.45s var(--ease-bounce) 0.45s both;
+}
+
+.intro-word {
+    animation: introWord 0.6s ease-out 0.6s both;
+}
+
+.intro-line {
+    width: min(260px, 60vw);
+    height: 2px;
+    border-radius: 2px;
+    background: var(--gradient-inline);
+    box-shadow: var(--shadow-line);
+    animation: introLine 0.7s ease-in-out 0.75s both;
+}
+
+@keyframes introCq {
+    from { opacity: 0; letter-spacing: 0.5em; filter: blur(8px); }
+    to { opacity: 1; letter-spacing: normal; filter: none; }
+}
+
+@keyframes introPop {
+    from { scale: 0; }
+    to { scale: 1; }
+}
+
+@keyframes introWord {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0); }
+}
+
+@keyframes introLine {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+@keyframes introOut {
+    to { opacity: 0; visibility: hidden; transform: translateY(-2%); }
+}
+
+/* --- Bandeau de l'accueil : apparition en cascade ---
+   Attend la fin de l'écran d'arrivée (--hero-delay), sauf s'il a déjà été vu. */
+.hero-card {
+    --hero-delay: 1.7s;
+    animation: heroCard 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) var(--hero-delay) both;
+}
+
+.intro-seen .hero-card {
+    --hero-delay: 0s;
+}
+
+.hero-text > * {
+    animation: fadeInUp 0.7s ease-out both;
+}
+
+.hero-text > :nth-child(1) { animation-delay: calc(var(--hero-delay) + 0.15s); }
+.hero-text > :nth-child(2) { animation-delay: calc(var(--hero-delay) + 0.25s); }
+.hero-text > :nth-child(4) { animation-delay: calc(var(--hero-delay) + 0.35s); }
+.hero-text > :nth-child(5) { animation-delay: calc(var(--hero-delay) + 0.45s); }
+
+.hero-image {
+    animation: heroImage 1s var(--ease-bounce) calc(var(--hero-delay) + 0.3s) both;
+}
+
+@keyframes heroCard {
+    from { opacity: 0; transform: translateY(24px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+}
+
+@keyframes heroImage {
+    from { opacity: 0; scale: 0.85; }
+    to { opacity: 1; scale: 1; }
+}
+
+/* --- Apparition au défilement ---
+   script.js pose .reveal sur les blocs encore hors de l'écran, puis
+   .is-visible quand ils y entrent ; --reveal-index décale les voisins pour
+   un effet de cascade. Les deux classes sont retirées à la fin, pour que
+   les transitions propres à chaque bloc (survol des cartes…) reprennent.
+   On anime translate et scale, pas transform, pour ne pas écraser celui
+   des blocs (centrage du trait des titres, survol). */
+.reveal {
+    opacity: 0;
+    translate: 0 28px;
+    transition: opacity 0.7s ease-out, translate 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: calc(var(--reveal-index, 0) * 80ms);
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    translate: none;
+}
+
+/* Le trait sous les titres se déploie depuis le centre */
+.section-title.reveal::after {
+    scale: 0 1;
+    transition: scale 0.8s ease-out 0.25s;
+}
+
+.section-title.reveal.is-visible::after {
+    scale: 1;
+}
+
+/* --- Changement de page : fondu enchaîné natif du navigateur ---
+   La navbar, identique partout, reste en place pendant le fondu.
+   Ignoré par les navigateurs qui ne le gèrent pas. */
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+        navigation: auto;
+    }
+
+    header {
+        view-transition-name: site-header;
+    }
+}
+
+/* Si le visiteur a demandé moins d'animations dans son système, tout est figé */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+
+    /* Sans animation, l'écran d'arrivée resterait affiché : on le retire */
+    .intro {
+        display: none;
+    }
+}
