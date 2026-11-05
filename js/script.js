@@ -18,7 +18,8 @@
  *  7. Pluie de caractères en fond du bandeau (accueil)
  *  8. Formulaire de contact (contact)
  *  9. Animations : écran d'arrivée et apparition au défilement
- * 10. Lancement
+ * 10. Explications dépliables du tableau E5 (tableau E5)
+ * 11. Lancement
  */
 
 /* ============================================================
@@ -647,7 +648,25 @@ function setupReveal() {
 }
 
 /* ============================================================
- * 10. LANCEMENT
+ * 10. EXPLICATIONS DÉPLIABLES DU TABLEAU E5
+ * ============================================================
+ * Le titre de chaque ligne du tableau mène à son <details> (#id).
+ * Le navigateur fait défiler jusqu'au bloc sans l'ouvrir : on l'ouvre ici,
+ * à l'arrivée sur la page comme à chaque clic sur une ligne. */
+function setupE5Details() {
+    if (!document.querySelector('details.e5-note')) return;
+
+    const openTarget = () => {
+        const target = window.location.hash && document.getElementById(window.location.hash.slice(1));
+        if (target instanceof HTMLDetailsElement) target.open = true;
+    };
+
+    openTarget();
+    window.addEventListener('hashchange', openTarget);
+}
+
+/* ============================================================
+ * 11. LANCEMENT
  * ============================================================
  * Exécuté une fois le HTML de la page entièrement chargé. */
 document.addEventListener('DOMContentLoaded', () => {
@@ -658,6 +677,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupCarousels();
     setupHeroMatrix();
     setupContactForm();
+    setupE5Details();
     setupIntro();
     setupReveal();
 });
