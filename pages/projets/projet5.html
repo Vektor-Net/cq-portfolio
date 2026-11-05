@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Borne kiosque congés · Corentin QUINIO</title>
-    <meta name="description" content="Mettre à disposition des salariés un poste en libre-service qui n&#x27;affiche qu&#x27;une seule page web, celle de la prise de congés, simple à utiliser et impossible à détourner.">
+    <title>Bornes de congés · Corentin QUINIO</title>
+    <meta name="description" content="Deux bornes tactiles permettent aux salariés de poser leurs congés avec leur badge. En 1re année : la borne en mode kiosque. En 2e année : la rendre fiable, sans rien acheter.">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fr_FR">
     <meta property="og:site_name" content="Portfolio de Corentin QUINIO">
-    <meta property="og:title" content="Borne kiosque congés · Corentin QUINIO">
-    <meta property="og:description" content="Mettre à disposition des salariés un poste en libre-service qui n&#x27;affiche qu&#x27;une seule page web, celle de la prise de congés, simple à utiliser et impossible à détourner.">
+    <meta property="og:title" content="Bornes de congés · Corentin QUINIO">
+    <meta property="og:description" content="Deux bornes tactiles permettent aux salariés de poser leurs congés avec leur badge. En 1re année : la borne en mode kiosque. En 2e année : la rendre fiable, sans rien acheter.">
     <link rel="icon" href="../../assets/favicon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,62 +32,63 @@
                     <div class="panel">
                         <p class="kicker">Réalisation professionnelle</p>
                         <i class="fas fa-tablet-screen-button icon-lg" aria-hidden="true"></i>
-                        <h1 id="project-title">Borne tactile en mode kiosque pour la prise de congés</h1>
-                        <p class="project-lead">Mettre à disposition des salariés un poste en libre-service qui n'affiche qu'une seule page web, celle de la prise de congés, simple à utiliser et impossible à détourner.</p>
+                        <h1 id="project-title">Bornes de pose de congés en libre-service, et leur supervision</h1>
+                        <p class="project-lead">Deux bornes tactiles permettent aux salariés de poser leurs congés avec leur badge. En 1re année : la borne en mode kiosque. En 2e année : la rendre fiable, sans rien acheter.</p>
                     </div>
                     <dl class="panel project-facts">
-                        <div class="tile"><dt class="eyebrow">Cadre</dt><dd>Alternance · Cordon Group</dd></div>
-                        <div class="tile"><dt class="eyebrow">Solution</dt><dd>Edge en mode kiosque</dd></div>
-                        <div class="tile"><dt class="eyebrow">Usage</dt><dd>Libre-service</dd></div>
+                        <div class="tile"><dt class="eyebrow">Cadre</dt><dd>Alternance · Cordon Group, 1re et 2e année</dd></div>
+                        <div class="tile"><dt class="eyebrow">Solution</dt><dd>Edge en mode kiosque + supervision</dd></div>
+                        <div class="tile"><dt class="eyebrow">Après une panne</dt><dd>Retour seul en 3 minutes environ</dd></div>
                     </dl>
                 </div>
 
                 <!-- Technologies utilisées -->
-                <ul class="tag-list project-tags" aria-label="Technologies utilisées"><li class="tag">Windows 11</li><li class="tag">Mode kiosque</li><li class="tag">Microsoft Edge</li><li class="tag">Autologon</li><li class="tag">Compte de service</li><li class="tag">GPO</li></ul>
+                <ul class="tag-list project-tags" aria-label="Technologies utilisées"><li class="tag">Windows 11</li><li class="tag">Mode kiosque</li><li class="tag">GPO</li><li class="tag">Autologon</li><li class="tag">PowerShell</li><li class="tag">Supervision</li></ul>
 
                 <!-- Corps de la fiche : contexte, environnement, démarche, résultat, compétences -->
                 <div class="grid grid--2">
                     <article class="card">
                         <h2>Contexte &amp; problématique</h2>
-                        <p>Les salariés devaient pouvoir poser leurs congés eux-mêmes, depuis un poste en libre-service.</p>
-                        <p>La borne devait être simple (écran tactile, aucune manipulation), mais aussi sécurisée : impossible de sortir de la page, de naviguer ailleurs ou d'ouvrir une session.</p>
+                        <p>Les salariés posent leurs congés eux-mêmes, sur une borne qui n'a qu'un écran tactile et un lecteur de badge. Elle doit être simple et impossible à détourner : pas d'autre page, pas de session ouverte.</p>
+                        <p>En service, le lecteur de badge se figeait régulièrement (19 fois en un peu plus de 3 mois), et la page restait parfois bloquée après une coupure du serveur ou du réseau. Il fallait alors se déplacer.</p>
                     </article>
                     <article class="card">
                         <h2>Environnement</h2>
-                        <ul class="bullet-list"><li>Poste Windows 11 dédié avec écran tactile</li><li>Compte de service aux droits minimum</li><li>Ouverture de session automatique (autologon)</li><li>Microsoft Edge en mode kiosque, URL unique</li></ul>
+                        <ul class="bullet-list"><li>Postes Windows 11 dédiés, écran tactile</li><li>Lecteur de badge USB et son contrôleur</li><li>Compte de service aux droits minimum, ouverture de session automatique</li><li>GPO de l'OU des bornes, Edge en mode kiosque</li><li>Supervision par tâche planifiée</li></ul>
                     </article>
                     <article class="card span-full">
                         <h2>Démarche</h2>
                         <ol class="steps">
-                            <li>Préparer et durcir le poste Windows 11 (mises à jour, droits).</li>
-                            <li>Placer le poste dans l'OU dédiée aux bornes dans l'Active Directory.</li>
-                            <li>Créer le compte de service avec des droits minimum et configurer l'autologon.</li>
-                            <li>Configurer Edge en mode kiosque avec une seule URL autorisée.</li>
-                            <li>Tester sur l'écran tactile : navigation, retour à l'accueil, stabilité.</li>
-                            <li>Documenter la procédure et prévoir un mode maintenance pour l'équipe IT.</li>
+                            <li><strong>1re année</strong> : poste Windows 11 durci et rangé dans l'OU des bornes, compte de service aux droits minimum, ouverture de session automatique, Edge en mode kiosque sur une seule page.</li>
+                            <li><strong>2e année</strong> : reproduire la panne du lecteur et en trouver la cause dans les journaux : seule une vraie coupure d'alimentation le débloque.</li>
+                            <li>Écrire un installeur unique (installer, vérifier, revenir en arrière) qui applique puis relit chaque réglage.</li>
+                            <li>Superviser la borne toutes les 2 secondes : si le lecteur se fige, elle se met en veille prolongée pour couper l'USB, puis le BIOS la réveille.</li>
+                            <li>Afficher une page d'explication pendant la panne, avec un garde-fou au-delà de 5 récupérations en 2 heures.</li>
+                            <li>Tester sur une borne pilote, puis valider la recette.</li>
                         </ol>
                     </article>
                     <article class="card card--highlight">
                         <h2>Résultat</h2>
-                        <p>La borne est en service : les salariés posent leurs congés en autonomie, et le poste ne donne accès à rien d'autre.</p>
+                        <p>Installée sur la borne pilote le 28/10/2026 : quand le lecteur se fige, la borne revient seule en 2 min 30 à 3 min 30, sans intervention.</p>
+                        <p>Les scripts sont écrits avec l'aide de l'IA ; le diagnostic, les tests, les décisions et la recette sont les miens.</p>
                     </article>
                     <article class="card">
                         <h2>Compétences mobilisées</h2>
-                        <ul class="bullet-list"><li>Durcissement d'un poste</li><li>Gestion des comptes et des droits</li><li>Configuration navigateur et OS</li><li>Documentation</li></ul>
+                        <ul class="bullet-list"><li>Durcissement d'un poste</li><li>Diagnostic par les journaux</li><li>Automatisation en PowerShell</li><li>Supervision</li><li>Documentation</li></ul>
                     </article>
                     <!-- Schéma de la démarche : pas de capture pour une réalisation en entreprise (documents internes non publiables) -->
                     <article class="card span-full">
                         <h2>En schéma</h2>
                         <figure class="figure figure--flow">
-                            <ol class="flow"><li><span class="flow-step-num">01</span>Poste Windows 11 <strong>durci</strong>, rangé dans l'OU des bornes</li><li><span class="flow-step-num">02</span><strong>Compte de service</strong> aux droits minimum</li><li><span class="flow-step-num">03</span>Ouverture de session automatique (<strong>autologon</strong>)</li><li><span class="flow-step-num">04</span><strong>Edge en mode kiosque</strong>, une seule URL autorisée</li><li><span class="flow-step-num">05</span>Page de <strong>prise de congés</strong> sur l'écran tactile</li></ol>
-                            <figcaption>Du démarrage du poste à la page de congés, sans aucune autre application accessible.</figcaption>
+                            <ol class="flow"><li><span class="flow-step-num">01</span>Borne en <strong>kiosque</strong> sur la page de congés</li><li><span class="flow-step-num">02</span><strong>Supervision</strong> toutes les 2 secondes</li><li><span class="flow-step-num">03</span>Lecteur de badge <strong>figé</strong> détecté</li><li><span class="flow-step-num">04</span><strong>Veille prolongée</strong>, puis réveil par le BIOS</li><li><span class="flow-step-num">05</span>Retour <strong>automatique</strong> sur la page de congés</li></ol>
+                            <figcaption>La récupération automatique quand le lecteur de badge se fige.</figcaption>
                         </figure>
                     </article>
                 </div>
 
                 <!-- Liens vers la réalisation précédente et la suivante -->
                 <nav class="project-nav divided" aria-label="Autres réalisations">
-                <a href="projet4.html"><span class="eyebrow">← Précédente</span>Accès Citrix sécurisé</a>
+                <a href="projet4.html"><span class="eyebrow">← Précédente</span>Accès Citrix et script du kit</a>
                 <a class="next" href="projet6.html"><span class="eyebrow">Suivante →</span>Mini-SI d'entreprise</a>
                 </nav>
             </div>

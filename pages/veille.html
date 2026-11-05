@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veille · Corentin QUINIO</title>
-    <meta name="description" content="Veille technologique de Corentin QUINIO : les failles de sécurité majeures de 2025 et 2026, et ce qu&#x27;elles changent pour un technicien.">
+    <meta name="description" content="Veille technologique de Corentin QUINIO : les failles de sécurité majeures de 2025 à 2027, et ce qu&#x27;elles changent pour un technicien.">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fr_FR">
     <meta property="og:site_name" content="Portfolio de Corentin QUINIO">
     <meta property="og:title" content="Veille · Corentin QUINIO">
-    <meta property="og:description" content="Veille technologique de Corentin QUINIO : les failles de sécurité majeures de 2025 et 2026, et ce qu&#x27;elles changent pour un technicien.">
+    <meta property="og:description" content="Veille technologique de Corentin QUINIO : les failles de sécurité majeures de 2025 à 2027, et ce qu&#x27;elles changent pour un technicien.">
     <link rel="icon" href="../assets/favicon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,135 +27,158 @@
             <div class="container">
                 <div class="page-hero">
                     <p class="kicker">Veille technologique</p>
-                    <h1 id="page-title" class="section-title">Les failles majeures de 2025 et 2026</h1>
-                    <p>Je suis les vulnérabilités les plus exploitées sur deux ans : ce qu'elles permettent, comment elles ont été corrigées, et ce qu'elles changent pour le parc et les services que je gère au quotidien.</p>
+                    <h1 id="page-title" class="section-title">Les failles de sécurité majeures, 2025 – 2027</h1>
+                    <p>Je suis les failles dont on a le plus parlé et qui ont été réellement exploitées. Pour chacune : ce qui s'est passé, en mots simples, et ce que ça change pour les postes et les services que je gère.</p>
                 </div>
 
-                <!-- Un bloc par année : une tuile par faille (date, CVE, ce qu'elle permet, lien avec mon travail) -->
-                <div class="grid">
-                    <article class="panel" aria-labelledby="veille-2025">
-                        <div class="topic-head">
-                            <i class="fas fa-bug" aria-hidden="true"></i>
-                            <h2 id="veille-2025">2025 : les passerelles d'accès en première ligne</h2>
-                        </div>
-                        <p class="topic-question">Une faille <strong>zero-day</strong> est exploitée avant que l'éditeur ait publié un correctif. Une <strong>CVE</strong> est l'identifiant public d'une faille, et son score <strong>CVSS</strong> mesure sa gravité sur 10.</p>
-                        <ul class="grid grid--3 grid--tight topic-pillars">
-                            <li class="tile">
-                                <p class="article-meta"><span class="tag">Juin 2025</span>CVE-2025-5777 · CVSS 9,3</p>
-                                <h3>CitrixBleed 2</h3>
-                                <p>Sur les passerelles Citrix NetScaler, un attaquant sans compte lit la mémoire de l'équipement et y vole des jetons de session : il reprend la session d'un utilisateur déjà connecté, sans repasser par la double authentification. Exploitée, ajoutée au catalogue KEV de la CISA le 10 juillet.</p>
-                                <p><strong>Pour moi :</strong> les utilisateurs que j'équipe pour un client passent par ce type de passerelle. Mettre à jour ne suffit pas : il faut aussi fermer les sessions ouvertes, déjà volées peut-être.</p>
-                            </li>
-                            <li class="tile">
-                                <p class="article-meta"><span class="tag">Juillet 2025</span>CVE-2025-53770</p>
-                                <h3>ToolShell (SharePoint)</h3>
-                                <p>Une chaîne de failles permet de prendre le contrôle d'un serveur SharePoint sans authentification. C'est la variante d'une faille déjà corrigée : le premier correctif a été contourné. Exploitée dès le 18 juillet, des administrations ont été touchées.</p>
-                                <p><strong>Pour moi :</strong> seul SharePoint installé sur ses propres serveurs était concerné, pas la version en ligne de Microsoft 365. Premier réflexe : vérifier si on est concerné avant d'agir.</p>
-                            </li>
-                            <li class="tile">
-                                <p class="article-meta"><span class="tag">Bilan 2025</span>CISA · catalogue KEV</p>
-                                <h3>245 failles exploitées en plus</h3>
-                                <p>Le catalogue des failles réellement exploitées (KEV) a grossi d'environ 20 % en 2025. Microsoft arrive en tête, devant Apple, Cisco, Fortinet, Chrome, Ivanti et le noyau Linux.</p>
-                                <p><strong>Pour moi :</strong> pour décider quoi corriger en premier, le fait qu'une faille soit exploitée compte plus que son seul score CVSS.</p>
-                            </li>
-                        </ul>
-                    </article>
+                <!-- Les 4 mots à connaître pour lire la frise -->
+                <section class="veille-block" aria-labelledby="mots-title">
+                    <h2 id="mots-title" class="section-title section-title--left section-title--sm">Les mots à connaître</h2>
+                    <dl class="grid grid--4 grid--tight glossary">
+                        <div class="tile"><dt>Faille (CVE)</dt><dd>Une erreur dans un logiciel qui permet de l'attaquer. Chacune reçoit un identifiant public, la CVE.</dd></div>
+                        <div class="tile"><dt>Gravité (CVSS)</dt><dd>Une note sur 10. Au-dessus de 9, la faille est critique.</dd></div>
+                        <div class="tile"><dt>Zero-day</dt><dd>Une faille exploitée avant que l'éditeur ait publié un correctif.</dd></div>
+                        <div class="tile"><dt>Catalogue KEV</dt><dd>La liste tenue par l'agence américaine CISA des failles réellement exploitées.</dd></div>
+                    </dl>
+                </section>
 
-                    <article class="panel" aria-labelledby="veille-2026">
-                        <div class="topic-head">
-                            <i class="fas fa-shield-halved" aria-hidden="true"></i>
-                            <h2 id="veille-2026">2026 : des failles exploitées de plus en plus vite</h2>
-                        </div>
-                        <p class="topic-question">En 2026, plusieurs failles critiques ont été exploitées dans les jours, voire les heures, qui ont suivi leur publication. Certaines touchent des briques présentes partout : le noyau Linux, PHP, des équipements connectés.</p>
-                        <ul class="grid grid--2 grid--tight topic-pillars">
-                            <li class="tile">
-                                <p class="article-meta"><span class="tag">Avril 2026</span>CVE-2026-31431</p>
-                                <h3>Copy Fail (noyau Linux)</h3>
-                                <p>Un utilisateur sans droits devient administrateur (root) sur presque toutes les versions récentes du noyau Linux. L'exploit est fiable, et la faille a été exploitée dès le lendemain de sa publication.</p>
-                                <p><strong>Pour moi :</strong> mettre à jour le noyau des serveurs Debian et Ubuntu, puis redémarrer. En attendant, un contournement : décharger le module concerné (<code>algif_aead</code>).</p>
-                            </li>
-                            <li class="tile">
-                                <p class="article-meta"><span class="tag">Septembre 2026</span>CVE-2026-88771 · CVE-2026-88772</p>
-                                <h3>Citrix NetScaler, encore</h3>
-                                <p>Deux failles zero-day permettent d'exécuter du code à distance sur les passerelles NetScaler. Elles étaient exploitées avant le bulletin de l'éditeur du 27 septembre.</p>
-                                <p><strong>Pour moi :</strong> la même famille d'équipements, deux années de suite. Ce qui est exposé sur Internet (VPN, passerelles d'accès) est la première cible et doit être corrigé en priorité.</p>
-                            </li>
-                            <li class="tile">
-                                <p class="article-meta"><span class="tag">Octobre 2026</span>CVE-2026-109618 · CVE-2026-109619</p>
-                                <h3>PHP2Shell (PHP)</h3>
-                                <p>Deux failles de PHP permettent d'exécuter du code à distance sans authentification. Toutes les versions non mises à jour sont touchées, y compris les anciennes versions qui ne sont plus maintenues. Des informations ont fuité avant le correctif du 21 octobre, et le CERT-FR a constaté des tentatives d'exploitation.</p>
-                                <p><strong>Pour moi :</strong> GLPI, l'outil de tickets que j'utilise, est écrit en PHP. Il faut vérifier la version de PHP de chaque serveur web. Les contournements proposés ne suffisent pas : seule la mise à jour protège.</p>
-                            </li>
-                            <li class="tile">
-                                <p class="article-meta"><span class="tag">Octobre-novembre 2026</span>Supermarchés · Europe</p>
-                                <h3>Les chambres froides des supermarchés</h3>
-                                <p>Le 12 octobre en France, puis dans la nuit du 1er au 2 novembre en Belgique, au Luxembourg et en Suède, les systèmes qui régulent à distance la température des frigos et congélateurs de grandes enseignes ont été attaqués. Des denrées ont été jetées. La cause technique n'est pas publiée et aucun groupe n'est identifié.</p>
-                                <p><strong>Pour moi :</strong> un équipement industriel connecté est aussi une porte d'entrée. Il faut isoler ces équipements dans leur propre réseau (VLAN) et contrôler les accès à distance des prestataires.</p>
-                            </li>
-                        </ul>
-                        <div data-carousel>
-                            <div class="sources-head">
-                                <h3 class="eyebrow">Sources</h3>
-                                <div class="carousel-controls">
-                                    <button class="carousel-btn" type="button" data-direction="prev" aria-label="Sources précédentes"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
-                                    <button class="carousel-btn" type="button" data-direction="next" aria-label="Sources suivantes"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+                <!-- Frise : le composant du parcours de l'accueil (§7), mais verticale et unique.
+                     Repères d'année dans la liste ; la ligne va du premier au dernier point (setupVulnTimeline).
+                     Libellé : nom, logiciel, date, CVE et gravité, exploitation. Détail au survol ou au clic, avec la source. -->
+                <section class="veille-block" aria-labelledby="frise-title">
+                    <h2 id="frise-title" class="section-title section-title--left section-title--sm">Ce qui s'est passé</h2>
+                    <div class="panel timeline-row timeline-row--vuln">
+                        <p class="vuln-hint">Survolez ou cliquez un point pour lire ce qui s'est passé et la source.</p>
+                        <div class="timeline-track timeline-track--vuln">
+                            <ol class="timeline-points">
+                            <li class="vuln-year-mark"><h3>2025</h3></li>
+                            <li class="timeline-node">
+                                <button class="timeline-dot" type="button" aria-expanded="false" aria-label="Afficher le détail : CitrixBleed 2"></button>
+                                <div class="timeline-label"><h4>CitrixBleed 2</h4><p class="timeline-role">Citrix NetScaler</p><span class="eyebrow">Juin 2025</span><p class="vuln-label-ids">CVE-2025-5777 · CVSS 9,3</p><span class="vuln-exploit">Exploitée</span></div>
+                                <div class="timeline-detail vuln-detail">
+                                    <div><h5>Ce qui se passe</h5><p>Sur les passerelles d&#x27;accès à distance Citrix, un attaquant sans compte lit la mémoire de l&#x27;équipement et y vole les jetons de session. Il reprend ainsi la session d&#x27;un utilisateur déjà connecté, sans passer par la double authentification.</p></div>
+                                    <div><h5>Pour moi</h5><p>Les utilisateurs que j&#x27;équipe pour un client passent par ce type de passerelle. Mettre à jour ne suffit pas : il faut aussi fermer les sessions ouvertes, qui ont pu être volées.</p></div>
+                                    <p class="vuln-source-line"><a href="https://www.theregister.com/2025/07/10/cisa_citrixbleed_kev/" target="_blank" rel="noopener">Source : The Register, ajout au catalogue KEV</a></p>
                                 </div>
-                            </div>
-                            <ul class="article-carousel carousel-track" aria-label="Sources sur les failles de 2025 et 2026">
-                            <li class="tile article-card">
-                                <p class="article-meta"><span class="tag">2026</span>CERT-FR · ANSSI</p>
-                                <h3>Multiples vulnérabilités dans PHP</h3>
-                                <p>Alerte CERTFR-2026-ALE-014 : versions touchées, exploitation constatée, contournements.</p>
-                                <a href="https://cert.cyber.gouv.fr/alerte/CERTFR-2026-ALE-014/" target="_blank" rel="noopener">Lire la source</a>
                             </li>
-                            <li class="tile article-card">
-                                <p class="article-meta"><span class="tag">2026</span>France 24</p>
-                                <h3>Les réfrigérateurs des supermarchés attaqués</h3>
-                                <p>Les vagues d'octobre en France et de novembre en Belgique, au Luxembourg et en Suède.</p>
-                                <a href="https://www.france24.com/fr/europe/20261102-europe-des-chaines-de-supermarches-victimes-incidents-informatiques-sur-refrigerateurs" target="_blank" rel="noopener">Lire la source</a>
+                            <li class="timeline-node">
+                                <button class="timeline-dot" type="button" aria-expanded="false" aria-label="Afficher le détail : ToolShell"></button>
+                                <div class="timeline-label"><h4>ToolShell</h4><p class="timeline-role">SharePoint (serveurs internes)</p><span class="eyebrow">Juillet 2025</span><p class="vuln-label-ids">CVE-2025-53770</p><span class="vuln-exploit">Zero-day</span></div>
+                                <div class="timeline-detail vuln-detail">
+                                    <div><h5>Ce qui se passe</h5><p>Une suite de failles permet de prendre le contrôle d&#x27;un serveur SharePoint sans compte. Elle contourne un correctif publié peu avant. Des administrations et des entreprises du monde entier ont été attaquées.</p></div>
+                                    <div><h5>Pour moi</h5><p>Seul SharePoint installé sur ses propres serveurs était touché, pas SharePoint Online de Microsoft 365. Premier réflexe : vérifier si on est concerné avant d&#x27;agir.</p></div>
+                                    <p class="vuln-source-line"><a href="https://www.securityweek.com/microsoft-patches-toolshell-zero-days-exploited-to-hack-sharepoint-servers/" target="_blank" rel="noopener">Source : SecurityWeek</a></p>
+                                </div>
                             </li>
-                            <li class="tile article-card">
-                                <p class="article-meta"><span class="tag">2026</span>IT-Connect</p>
-                                <h3>Zero-day Citrix NetScaler</h3>
-                                <p>Les deux failles exploitées corrigées fin septembre.</p>
-                                <a href="https://www.it-connect.fr/citrix-netscaler-cve-2026-88771-cve-2026-88772-zero-day-exploitees/" target="_blank" rel="noopener">Lire la source</a>
+                            <li class="timeline-node">
+                                <button class="timeline-dot" type="button" aria-expanded="false" aria-label="Afficher le détail : Pare-feu Cisco ASA"></button>
+                                <div class="timeline-label"><h4>Pare-feu Cisco ASA</h4><p class="timeline-role">Cisco ASA et Firepower</p><span class="eyebrow">Septembre 2025</span><p class="vuln-label-ids">CVE-2025-20333 · CVSS 9,9</p><span class="vuln-exploit">Zero-day</span></div>
+                                <div class="timeline-detail vuln-detail">
+                                    <div><h5>Ce qui se passe</h5><p>Deux failles enchaînées permettent de contourner l&#x27;authentification du VPN de ces pare-feu, puis d&#x27;y exécuter du code avec tous les droits. L&#x27;agence américaine CISA a ordonné aux administrations de corriger en urgence.</p></div>
+                                    <div><h5>Pour moi</h5><p>Un pare-feu ou un VPN exposé sur Internet est la première cible : appliquer le correctif dès sa sortie, puis vérifier que l&#x27;équipement n&#x27;a pas déjà été compromis.</p></div>
+                                    <p class="vuln-source-line"><a href="https://www.bleepingcomputer.com/news/security/cisa-orders-agencies-to-patch-cisco-flaws-exploited-in-zero-day-attacks/" target="_blank" rel="noopener">Source : BleepingComputer</a></p>
+                                </div>
                             </li>
-                            <li class="tile article-card">
-                                <p class="article-meta"><span class="tag">2026</span>Qualys</p>
-                                <h3>Copy Fail exploitée</h3>
-                                <p>La faille du noyau Linux, son exploitation et ses correctifs.</p>
-                                <a href="https://threatprotect.qualys.com/2026/05/04/linux-kernel-vulnerability-exploited-in-the-wild-copy-fail-cve-2026-31431/" target="_blank" rel="noopener">Lire la source</a>
+                            <li class="timeline-node">
+                                <button class="timeline-dot" type="button" aria-expanded="false" aria-label="Afficher le détail : WSUS"></button>
+                                <div class="timeline-label"><h4>WSUS</h4><p class="timeline-role">Windows Server</p><span class="eyebrow">Octobre 2025</span><p class="vuln-label-ids">CVE-2025-59287 · CVSS 9,8</p><span class="vuln-exploit">Exploitée</span></div>
+                                <div class="timeline-detail vuln-detail">
+                                    <div><h5>Ce qui se passe</h5><p>Le service de Windows Server qui distribue les mises à jour (WSUS) pouvait être pris en main à distance, sans compte. Le premier correctif était incomplet : Microsoft en a publié un en urgence le 23 octobre, et les attaques ont commencé le lendemain.</p></div>
+                                    <div><h5>Pour moi</h5><p>WSUS met à jour tout le parc : s&#x27;il est compromis, tous les postes le sont. Il ne doit jamais être joignable depuis Internet, et ce correctif s&#x27;applique sans attendre le calendrier habituel.</p></div>
+                                    <p class="vuln-source-line"><a href="https://www.infosecurity-magazine.com/news/actively-exploited-wsus-bug-cisa/" target="_blank" rel="noopener">Source : Infosecurity Magazine</a></p>
+                                </div>
                             </li>
-                            <li class="tile article-card">
-                                <p class="article-meta"><span class="tag">2025</span>The Register</p>
-                                <h3>CitrixBleed 2 ajoutée au KEV</h3>
-                                <p>La CISA confirme l'exploitation de CVE-2025-5777.</p>
-                                <a href="https://www.theregister.com/2025/07/10/cisa_citrixbleed_kev/" target="_blank" rel="noopener">Lire la source</a>
+                            <li class="timeline-node">
+                                <button class="timeline-dot" type="button" aria-expanded="false" aria-label="Afficher le détail : React2Shell"></button>
+                                <div class="timeline-label"><h4>React2Shell</h4><p class="timeline-role">React et Next.js (sites web)</p><span class="eyebrow">Décembre 2025</span><p class="vuln-label-ids">CVE-2025-55182 · CVSS 10</p><span class="vuln-exploit">Exploitée en quelques heures</span></div>
+                                <div class="timeline-detail vuln-detail">
+                                    <div><h5>Ce qui se passe</h5><p>Une seule requête suffit pour exécuter du code sur un serveur qui utilise les composants serveur de React, comme beaucoup de sites Next.js. Des groupes d&#x27;attaquants l&#x27;ont exploitée quelques heures après sa publication, notamment pour installer des mineurs de cryptomonnaie.</p></div>
+                                    <div><h5>Pour moi</h5><p>Un site web hébergé par l&#x27;entreprise est aussi une porte d&#x27;entrée : il faut savoir quelles applications web tournent, et sur quelles briques, pour savoir vite si on est concerné.</p></div>
+                                    <p class="vuln-source-line"><a href="https://securelist.com/cve-2025-55182-exploitation/118331/" target="_blank" rel="noopener">Source : Kaspersky Securelist</a></p>
+                                </div>
                             </li>
-                            <li class="tile article-card">
-                                <p class="article-meta"><span class="tag">2025</span>SecurityWeek</p>
-                                <h3>ToolShell : SharePoint attaqué</h3>
-                                <p>La chaîne de failles exploitée en juillet 2025 et ses correctifs.</p>
-                                <a href="https://www.securityweek.com/microsoft-patches-toolshell-zero-days-exploited-to-hack-sharepoint-servers/" target="_blank" rel="noopener">Lire la source</a>
+                            <li class="vuln-year-mark"><h3>2026</h3></li>
+                            <li class="timeline-node">
+                                <button class="timeline-dot" type="button" aria-expanded="false" aria-label="Afficher le détail : Copy Fail"></button>
+                                <div class="timeline-label"><h4>Copy Fail</h4><p class="timeline-role">Noyau Linux</p><span class="eyebrow">Avril 2026</span><p class="vuln-label-ids">CVE-2026-31431</p><span class="vuln-exploit">Exploitée dès le lendemain</span></div>
+                                <div class="timeline-detail vuln-detail">
+                                    <div><h5>Ce qui se passe</h5><p>Un utilisateur sans droits devient administrateur (root) sur presque toutes les versions récentes de Linux. L&#x27;attaque est fiable, et elle a été utilisée le lendemain de la publication de la faille.</p></div>
+                                    <div><h5>Pour moi</h5><p>Mettre à jour le noyau des serveurs Debian et Ubuntu, puis les redémarrer. En attendant, on peut désactiver le module concerné (algif_aead).</p></div>
+                                    <p class="vuln-source-line"><a href="https://threatprotect.qualys.com/2026/05/04/linux-kernel-vulnerability-exploited-in-the-wild-copy-fail-cve-2026-31431/" target="_blank" rel="noopener">Source : Qualys</a></p>
+                                </div>
                             </li>
-                            <li class="tile article-card">
-                                <p class="article-meta"><span class="tag">2025</span>Cyble</p>
-                                <h3>Le catalogue KEV en 2025</h3>
-                                <p>245 failles exploitées ajoutées, éditeurs les plus touchés.</p>
-                                <a href="https://cyble.com/blog/cisa-kev-2025-exploited-vulnerabilities-growth/" target="_blank" rel="noopener">Lire la source</a>
+                            <li class="timeline-node">
+                                <button class="timeline-dot" type="button" aria-expanded="false" aria-label="Afficher le détail : Citrix NetScaler, encore"></button>
+                                <div class="timeline-label"><h4>Citrix NetScaler, encore</h4><p class="timeline-role">Citrix NetScaler</p><span class="eyebrow">Septembre 2026</span><p class="vuln-label-ids">CVE-2026-88771 · 88772</p><span class="vuln-exploit">Zero-day</span></div>
+                                <div class="timeline-detail vuln-detail">
+                                    <div><h5>Ce qui se passe</h5><p>Deux failles permettent d&#x27;exécuter du code à distance sur les mêmes passerelles Citrix. Elles étaient exploitées avant le correctif publié le 27 septembre.</p></div>
+                                    <div><h5>Pour moi</h5><p>Le même équipement, deux années de suite. Ce qui est exposé sur Internet (VPN, passerelles d&#x27;accès) est la première cible : c&#x27;est ce qu&#x27;il faut corriger en premier.</p></div>
+                                    <p class="vuln-source-line"><a href="https://www.it-connect.fr/citrix-netscaler-cve-2026-88771-cve-2026-88772-zero-day-exploitees/" target="_blank" rel="noopener">Source : IT-Connect</a></p>
+                                </div>
                             </li>
-                            <li class="tile article-card">
-                                <p class="article-meta"><span class="tag">En continu</span>CISA</p>
-                                <h3>Known Exploited Vulnerabilities</h3>
-                                <p>Le catalogue officiel des failles réellement exploitées.</p>
-                                <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">Lire la source</a>
+                            <li class="timeline-node">
+                                <button class="timeline-dot" type="button" aria-expanded="false" aria-label="Afficher le détail : Ivanti Connect Secure"></button>
+                                <div class="timeline-label"><h4>Ivanti Connect Secure</h4><p class="timeline-role">Boîtiers VPN Ivanti</p><span class="eyebrow">Octobre 2026</span><p class="vuln-label-ids">CVE-2026-104935 · 111357 · 118527</p><span class="vuln-exploit">Exploitées</span></div>
+                                <div class="timeline-detail vuln-detail">
+                                    <div><h5>Ce qui se passe</h5><p>Trois failles sur ces boîtiers VPN permettent d&#x27;exécuter du code à distance et d&#x27;obtenir plus de droits. Le CERT-FR demande d&#x27;isoler le boîtier, de chercher une compromission, et de considérer comme volés tous les secrets qu&#x27;il contient.</p></div>
+                                    <div><h5>Pour moi</h5><p>Ces boîtiers sont reliés à l&#x27;Active Directory : s&#x27;ils sont compromis, il faut aussi changer les mots de passe des comptes de service qu&#x27;ils utilisent, pas seulement les mettre à jour.</p></div>
+                                    <p class="vuln-source-line"><a href="https://cert.cyber.gouv.fr/alerte/CERTFR-2026-ALE-013/" target="_blank" rel="noopener">Source : CERT-FR, alerte CERTFR-2026-ALE-013</a></p>
+                                </div>
                             </li>
-                            </ul>
+                            <li class="timeline-node">
+                                <button class="timeline-dot" type="button" aria-expanded="false" aria-label="Afficher le détail : PHP2Shell"></button>
+                                <div class="timeline-label"><h4>PHP2Shell</h4><p class="timeline-role">PHP</p><span class="eyebrow">Octobre 2026</span><p class="vuln-label-ids">CVE-2026-109618 · 109619</p><span class="vuln-exploit">Exploitation constatée</span></div>
+                                <div class="timeline-detail vuln-detail">
+                                    <div><h5>Ce qui se passe</h5><p>Deux failles de PHP permettent d&#x27;exécuter du code à distance sans compte, sur toutes les versions non mises à jour. Des détails ont fuité avant le correctif du 21 octobre, et le CERT-FR a constaté des tentatives d&#x27;attaque.</p></div>
+                                    <div><h5>Pour moi</h5><p>GLPI, l&#x27;outil de tickets que j&#x27;utilise, est écrit en PHP. Je vérifie la version de PHP de chaque serveur web : seule la mise à jour protège vraiment.</p></div>
+                                    <p class="vuln-source-line"><a href="https://cert.cyber.gouv.fr/alerte/CERTFR-2026-ALE-014/" target="_blank" rel="noopener">Source : CERT-FR, alerte CERTFR-2026-ALE-014</a></p>
+                                </div>
+                            </li>
+                            <li class="timeline-node">
+                                <button class="timeline-dot" type="button" aria-expanded="false" aria-label="Afficher le détail : Frigos des supermarchés"></button>
+                                <div class="timeline-label"><h4>Frigos des supermarchés</h4><p class="timeline-role">Équipements connectés</p><span class="eyebrow">Oct. – nov. 2026</span><p class="vuln-label-ids">Faille non publiée</p><span class="vuln-exploit">Attaque</span></div>
+                                <div class="timeline-detail vuln-detail">
+                                    <div><h5>Ce qui se passe</h5><p>Les systèmes qui règlent à distance la température des frigos de grandes enseignes ont été attaqués, le 12 octobre en France puis début novembre en Belgique, au Luxembourg et en Suède. Des denrées ont été jetées.</p></div>
+                                    <div><h5>Pour moi</h5><p>Un équipement industriel connecté est aussi une porte d&#x27;entrée. Il faut le placer dans son propre réseau (VLAN) et contrôler les accès à distance des prestataires.</p></div>
+                                    <p class="vuln-source-line"><a href="https://www.france24.com/fr/europe/20261102-europe-des-chaines-de-supermarches-victimes-incidents-informatiques-sur-refrigerateurs" target="_blank" rel="noopener">Source : France 24</a></p>
+                                </div>
+                            </li>
+                            <li class="vuln-year-mark"><h3>2027</h3></li>
+                            <li class="timeline-node">
+                                <button class="timeline-dot" type="button" aria-expanded="false" aria-label="Afficher le détail : Suivi en cours"></button>
+                                <div class="timeline-label"><h4>Suivi en cours</h4><p class="timeline-role">Jusqu&#x27;à l&#x27;examen</p><span class="eyebrow">2027</span></div>
+                                <div class="timeline-detail vuln-detail">
+                                    <div><h5>Ce qui se passe</h5><p>Les nouvelles failles majeures de 2027 seront ajoutées ici au fil de l&#x27;année.</p></div>
+                                    <div><h5>Pour moi</h5><p>Même méthode : vérifier si on est concerné, puis corriger dans le bon ordre.</p></div>
+                                </div>
+                            </li>
+                            </ol>
                         </div>
+                    </div>
+                </section>
+
+                <!-- Méthode : sources suivies et réflexes -->
+                <section class="veille-block split" aria-labelledby="methode-title">
+                    <div class="prose">
+                        <h2 id="methode-title" class="section-title section-title--left section-title--sm">Ma méthode</h2>
+                        <ol class="steps">
+                            <li><strong>Vérifier si on est concerné</strong> : quel produit, quelle version, est-il exposé sur Internet ?</li>
+                            <li><strong>Corriger d'abord ce qui est exploité</strong>, même si une autre faille a une note plus haute.</li>
+                            <li><strong>Préférer la mise à jour</strong> au contournement, qui ne protège qu'en partie.</li>
+                            <li><strong>Chercher des traces</strong> d'intrusion après coup : sessions ouvertes, journaux.</li>
+                        </ol>
+                    </div>
+                    <div class="tile sources">
+                        <h3 class="eyebrow">Mes sources de référence</h3>
                         <!-- TODO : ajouter mes outils de veille (flux, alertes, abonnements) quand Corentin les aura précisés -->
-                        <p class="tile takeaway"><strong>Ce que j'en retiens pour mon métier :</strong> les attaquants visent d'abord ce qui est exposé sur Internet et exploitent de plus en plus vite. Mes réflexes : vérifier si on est concerné, suivre les alertes du CERT-FR et le catalogue KEV, préférer la mise à jour au contournement, puis chercher des traces de compromission (sessions, journaux).</p>
-                    </article>
-                </div>
+                        <ul class="bullet-list">
+                            <li><a href="https://cert.cyber.gouv.fr/" target="_blank" rel="noopener">CERT-FR</a> : les alertes officielles françaises (ANSSI).</li>
+                            <li><a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">Catalogue KEV de la CISA</a> : les failles réellement exploitées. En 2025, il en a ajouté 245 (<a href="https://cyble.com/blog/cisa-kev-2025-exploited-vulnerabilities-growth/" target="_blank" rel="noopener">bilan Cyble</a>).</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <p class="tile takeaway"><strong>Ce que j'en retiens :</strong> les attaquants visent d'abord ce qui est exposé sur Internet, et ils exploitent les failles de plus en plus vite, parfois le lendemain. Mon rôle de technicien : savoir vite si nous sommes concernés, et corriger dans le bon ordre.</p>
             </div>
         </section>
     </main>

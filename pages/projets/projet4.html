@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accès Citrix sécurisé · Corentin QUINIO</title>
-    <meta name="description" content="Préparer les postes pour qu&#x27;un utilisateur accède aux ressources d&#x27;un client grand compte via Citrix, avec authentification forte par carte à puce et certificats. Client anonymisé.">
+    <title>Accès Citrix et script du kit · Corentin QUINIO</title>
+    <meta name="description" content="Équiper les postes des utilisateurs qui travaillent pour un client grand compte : l&#x27;accès à son portail Citrix avec un badge à puce, puis l&#x27;automatisation de la mise à jour du kit de connexion imposé par le client. Client anonymisé.">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fr_FR">
     <meta property="og:site_name" content="Portfolio de Corentin QUINIO">
-    <meta property="og:title" content="Accès Citrix sécurisé · Corentin QUINIO">
-    <meta property="og:description" content="Préparer les postes pour qu&#x27;un utilisateur accède aux ressources d&#x27;un client grand compte via Citrix, avec authentification forte par carte à puce et certificats. Client anonymisé.">
+    <meta property="og:title" content="Accès Citrix et script du kit · Corentin QUINIO">
+    <meta property="og:description" content="Équiper les postes des utilisateurs qui travaillent pour un client grand compte : l&#x27;accès à son portail Citrix avec un badge à puce, puis l&#x27;automatisation de la mise à jour du kit de connexion imposé par le client. Client anonymisé.">
     <link rel="icon" href="../../assets/favicon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,55 +32,56 @@
                     <div class="panel">
                         <p class="kicker">Réalisation professionnelle</p>
                         <i class="fas fa-id-card icon-lg" aria-hidden="true"></i>
-                        <h1 id="project-title">Accès sécurisé au portail d'un client via Citrix et carte à puce</h1>
-                        <p class="project-lead">Préparer les postes pour qu'un utilisateur accède aux ressources d'un client grand compte via Citrix, avec authentification forte par carte à puce et certificats. Client anonymisé.</p>
+                        <h1 id="project-title">Accès sécurisé au portail d'un client via Citrix, et script de mise à jour du kit</h1>
+                        <p class="project-lead">Équiper les postes des utilisateurs qui travaillent pour un client grand compte : l'accès à son portail Citrix avec un badge à puce, puis l'automatisation de la mise à jour du kit de connexion imposé par le client. Client anonymisé.</p>
                     </div>
                     <dl class="panel project-facts">
-                        <div class="tile"><dt class="eyebrow">Cadre</dt><dd>Alternance · Cordon Group</dd></div>
+                        <div class="tile"><dt class="eyebrow">Cadre</dt><dd>Alternance · Cordon Group, 1re et 2e année</dd></div>
                         <div class="tile"><dt class="eyebrow">Solution</dt><dd>Citrix Workspace + NetScaler</dd></div>
-                        <div class="tile"><dt class="eyebrow">Authentification</dt><dd>Carte à puce + certificats</dd></div>
+                        <div class="tile"><dt class="eyebrow">Automatisation</dt><dd>Script PowerShell, relançable sans risque</dd></div>
                     </dl>
                 </div>
 
                 <!-- Technologies utilisées -->
-                <ul class="tag-list project-tags" aria-label="Technologies utilisées"><li class="tag">Citrix</li><li class="tag">NetScaler</li><li class="tag">PKI</li><li class="tag">certutil</li><li class="tag">Carte à puce</li><li class="tag">Windows 10/11</li></ul>
+                <ul class="tag-list project-tags" aria-label="Technologies utilisées"><li class="tag">Citrix</li><li class="tag">NetScaler</li><li class="tag">PKI</li><li class="tag">certutil</li><li class="tag">Carte à puce</li><li class="tag">PowerShell</li><li class="tag">MeshCentral</li></ul>
 
                 <!-- Corps de la fiche : contexte, environnement, démarche, résultat, compétences -->
                 <div class="grid grid--2">
                     <article class="card">
                         <h2>Contexte &amp; problématique</h2>
-                        <p>Le client publie ses applications via un portail Citrix sécurisé. Pour s'y connecter, le poste doit être conforme (mises à jour, antivirus, pare-feu) et l'utilisateur doit s'authentifier avec un badge et un code PIN.</p>
-                        <p>Les incidents étaient fréquents : certificat manquant, fichier <code>.ica</code> mal associé, problèmes en multi-écran. L'objectif était aussi de standardiser l'installation pour les réduire.</p>
+                        <p>Le client publie ses applications via un portail Citrix sécurisé. Pour s'y connecter, le poste doit être conforme (mises à jour, antivirus, pare-feu) et l'utilisateur s'authentifie avec un badge à puce et un code PIN.</p>
+                        <p>Le client fournit un kit de connexion (logiciels, pilotes du badge, certificats) qu'il met à jour régulièrement. En 2e année, des postes avaient encore une ancienne version, et la mise à jour à la main était longue et source d'erreurs, avec une date limite imposée par le client.</p>
                     </article>
                     <article class="card">
                         <h2>Environnement</h2>
-                        <ul class="bullet-list"><li>Postes Windows 10 et 11</li><li>Lecteur de carte à puce et pilotes Gemalto</li><li>NetScaler Gateway et Citrix Workspace</li><li>Certificats racines et intermédiaires (DigiCert)</li></ul>
+                        <ul class="bullet-list"><li>Postes Windows 10 et 11</li><li>Badge à puce et ses pilotes</li><li>NetScaler Gateway, Citrix Workspace et contrôle de conformité (Endpoint Analysis)</li><li>Certificats fournis par le client</li><li>MeshCentral pour lancer le script à distance</li></ul>
                     </article>
                     <article class="card span-full">
                         <h2>Démarche</h2>
                         <ol class="steps">
-                            <li>Vérifier la conformité du poste : mises à jour, antivirus reconnu, pare-feu actif, navigateur.</li>
-                            <li>Installer ou mettre à jour les pilotes du badge et valider le code PIN.</li>
-                            <li>Installer NetScaler Gateway puis Citrix Workspace avec les options demandées.</li>
-                            <li>Installer les certificats en administrateur avec <code>certutil</code>.</li>
-                            <li>Tester l'accès complet : choix du certificat, PIN, ouverture de la session Citrix.</li>
-                            <li>Rédiger la procédure et un mémo de dépannage pour les erreurs courantes.</li>
+                            <li><strong>1re année</strong> : préparer l'accès sur chaque poste : conformité, pilotes du badge et PIN, Citrix Workspace, certificats avec <code>certutil</code>, puis test complet avec le badge.</li>
+                            <li><strong>2e année</strong> : analyser le nouveau kit et tester chaque commande à la main sur un poste de test, avant d'écrire le moindre script.</li>
+                            <li>Écrire un script PowerShell qui compare le poste au kit et n'installe que ce qui manque : anciens composants retirés, certificats ajoutés seulement s'ils manquent, pilotes mis à jour si besoin.</li>
+                            <li>Faire décider le résultat par une vérification finale sur l'état réel du poste, avec un code de sortie et un journal à chaque exécution.</li>
+                            <li>Tester 14 scénarios simulés, puis déployer par clé USB et à distance avec MeshCentral. Un bloc de 11 contrôles, sans rien modifier, confirme chaque poste.</li>
+                            <li>Rédiger l'instruction de travail et un guide pratique pour l'équipe.</li>
                         </ol>
                     </article>
                     <article class="card card--highlight">
                         <h2>Résultat</h2>
-                        <p>Connexion au portail et ouverture de session Citrix sans erreur. La procédure d'installation et le mémo de dépannage permettent de reproduire la configuration sur d'autres postes.</p>
+                        <p>Un poste se met à niveau en une seule exécution, et le script peut être relancé sans risque. La vérification finale et le bloc de contrôle disent tout de suite si un poste est conforme ; le résumé du journal va dans le ticket GLPI.</p>
+                        <p>Le script a été écrit avec l'aide de l'IA : je l'ai piloté, testé sur le terrain et validé, et je sais l'expliquer.</p>
                     </article>
                     <article class="card">
                         <h2>Compétences mobilisées</h2>
-                        <ul class="bullet-list"><li>Gestion des certificats sous Windows</li><li>Contraintes réseau et sécurité (CRL, proxy)</li><li>Support et dépannage</li><li>Rédaction de procédure</li></ul>
+                        <ul class="bullet-list"><li>Certificats et PKI sous Windows</li><li>Automatisation en PowerShell</li><li>Tests avant déploiement</li><li>Déploiement à distance</li><li>Rédaction de procédure</li></ul>
                     </article>
                     <!-- Schéma de la démarche : pas de capture pour une réalisation en entreprise (client anonymisé) -->
                     <article class="card span-full">
                         <h2>En schéma</h2>
                         <figure class="figure figure--flow">
-                            <ol class="flow"><li><span class="flow-step-num">01</span>Poste <strong>conforme</strong> : mises à jour, antivirus, pare-feu</li><li><span class="flow-step-num">02</span>Pilotes du <strong>lecteur de carte</strong> et code PIN validés</li><li><span class="flow-step-num">03</span><strong>NetScaler Gateway</strong> et <strong>Citrix Workspace</strong> installés</li><li><span class="flow-step-num">04</span><strong>Certificats</strong> racine et intermédiaire posés avec certutil</li><li><span class="flow-step-num">05</span>Session Citrix ouverte avec <strong>certificat + PIN</strong></li></ol>
-                            <figcaption>Chaîne d'accès préparée sur chaque poste, du contrôle de conformité à l'ouverture de session.</figcaption>
+                            <ol class="flow"><li><span class="flow-step-num">01</span>Kit du client analysé, commandes <strong>testées à la main</strong></li><li><span class="flow-step-num">02</span><strong>Contrôles préalables</strong> : sinon arrêt, sans rien modifier</li><li><span class="flow-step-num">03</span>Seul <strong>ce qui manque</strong> est installé</li><li><span class="flow-step-num">04</span><strong>Vérification finale</strong> sur l'état réel du poste</li><li><span class="flow-step-num">05</span><strong>Journal</strong> et code de sortie, résumé dans le ticket</li></ol>
+                            <figcaption>Ce que fait le script sur chaque poste, du kit à la vérification finale.</figcaption>
                         </figure>
                     </article>
                 </div>
@@ -88,7 +89,7 @@
                 <!-- Liens vers la réalisation précédente et la suivante -->
                 <nav class="project-nav divided" aria-label="Autres réalisations">
                 <a href="projet3.html"><span class="eyebrow">← Précédente</span>Interconnexion pfSense</a>
-                <a class="next" href="projet5.html"><span class="eyebrow">Suivante →</span>Borne kiosque congés</a>
+                <a class="next" href="projet5.html"><span class="eyebrow">Suivante →</span>Bornes de congés</a>
                 </nav>
             </div>
         </section>

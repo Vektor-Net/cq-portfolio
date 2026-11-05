@@ -19,7 +19,8 @@
  *  8. Formulaire de contact (contact)
  *  9. Animations : écran d'arrivée et apparition au défilement
  * 10. Explications dépliables du tableau E5 (tableau E5)
- * 11. Lancement
+ * 11. Frise verticale des failles (veille)
+ * 12. Lancement
  */
 
 /* ============================================================
@@ -209,7 +210,8 @@ function gradientColorAt(t) {
    verticale sur mobile) et range dans --dot-rgb, sur son étape, la couleur
    du dégradé à cet endroit. */
 function paintTimelineDots() {
-    document.querySelectorAll('.timeline-track').forEach((track) => {
+    // La frise de la veille a sa propre ligne et ses couleurs (setupVulnTimeline)
+    document.querySelectorAll('.timeline-track:not(.timeline-track--vuln)').forEach((track) => {
         const line = getComputedStyle(track, '::before');
         const box = track.getBoundingClientRect();
         const vertical = parseFloat(line.height) > parseFloat(line.width);
@@ -605,7 +607,7 @@ function setupIntro() {
 
 const REVEAL_SELECTOR = [
     '.section-title', '.section-intro', '.page-hero', '.panel', '.card', '.tile',
-    '.flip-card', '.figure', '.project-rail-wrap', '.project-tags', '.project-nav', '.back-link'
+    '.flip-card', '.figure', '.work-group-head', '.work-card', '.project-tags', '.project-nav', '.back-link'
 ].join(', ');
 
 function setupReveal() {
@@ -615,7 +617,7 @@ function setupReveal() {
     // retournables sont gérées par la carte, et un bloc déjà animé par un
     // parent ne l'est pas une seconde fois.
     const blocks = [...document.querySelectorAll(`main :is(${REVEAL_SELECTOR})`)].filter((block) =>
-        !block.closest('.hero, .flip-face, .project-rail')
+        !block.closest('.hero, .flip-face')
         && !block.parentElement.closest(REVEAL_SELECTOR));
 
     const viewportBottom = window.innerHeight;
@@ -666,7 +668,45 @@ function setupE5Details() {
 }
 
 /* ============================================================
- * 11. LANCEMENT
+ * 11. FRISE VERTICALE DES FAILLES
+ * ============================================================
+ * La ligne va du centre du premier point au centre du dernier : le premier
+ * est au début du dégradé (cyan), le dernier à la fin (rouge). Chaque point
+ * prend la couleur du dégradé à sa hauteur. Tout est recalculé quand la
+ * liste change de taille (un détail qui se déplie décale les points). */
+function setupVulnTimeline() {
+    const lists = document.querySelectorAll('.timeline-track--vuln .timeline-points');
+    if (!lists.length) return;
+
+    const paint = (list) => {
+        const dots = [...list.querySelectorAll('.timeline-dot')];
+        if (!dots.length) return;
+        const top = list.getBoundingClientRect().top;
+        const centers = dots.map((dot) => {
+            const rect = dot.getBoundingClientRect();
+            return rect.top + rect.height / 2 - top;
+        });
+        const first = centers[0];
+        const length = centers[centers.length - 1] - first;
+
+        list.style.setProperty('--line-top', `${first}px`);
+        list.style.setProperty('--line-height', `${length}px`);
+        dots.forEach((dot, i) => {
+            const t = length > 0 ? (centers[i] - first) / length : 0;
+            dot.closest('.timeline-node').style.setProperty('--dot-rgb', gradientColorAt(t));
+        });
+    };
+
+    lists.forEach((list) => {
+        paint(list);
+        new ResizeObserver(() => paint(list)).observe(list);
+        // Les polices chargées après coup peuvent décaler les points
+        window.addEventListener('load', () => paint(list));
+    });
+}
+
+/* ============================================================
+ * 12. LANCEMENT
  * ============================================================
  * Exécuté une fois le HTML de la page entièrement chargé. */
 document.addEventListener('DOMContentLoaded', () => {
@@ -678,6 +718,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupHeroMatrix();
     setupContactForm();
     setupE5Details();
+    setupVulnTimeline();
     setupIntro();
     setupReveal();
 });

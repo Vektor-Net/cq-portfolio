@@ -28,85 +28,172 @@
                 <div class="page-hero">
                     <p class="kicker">Épreuve E5</p>
                     <h1 id="page-title" class="section-title">Réalisations</h1>
-                    <p>Quatre projets menés en lab pendant la formation et trois réalisations en entreprise chez Cordon Group. Ouvrez une fiche pour le contexte, la démarche et le résultat.</p>
+                    <p>Trois réalisations en entreprise chez Cordon Group, quatre projets menés en lab pendant la formation, et deux projets personnels. Ouvrez une fiche pour le contexte, la démarche et le résultat.</p>
                 </div>
 
-                <!-- Grille des réalisations : toutes visibles d'un coup (le jury voit tout sans faire défiler).
-                     Ordre = numéro de fiche. -->
-                <div class="project-rail-wrap">
-                    <ol class="project-rail" aria-label="Réalisations">
+                <!-- Trois groupes de cartes : entreprise, formation, projets personnels.
+                     Aperçu de chaque carte : une capture (<img>) ou, en attendant, une icône. -->
+                <section class="work-group work-group--pro" aria-labelledby="groupe-pro">
+                    <div class="work-group-head">
+                        <h2 id="groupe-pro">En entreprise · Cordon Group</h2>
+                        <span class="work-group-count">3 réalisations</span>
+                    </div>
+                    <ul class="work-grid">
                         <li>
-                            <a href="projets/projet1.html" class="project-slide project-slide--lab">
-                                <span class="project-slide-num" aria-hidden="true">01</span>
-                                <p class="project-slide-meta">Lab · 1re année</p>
-                                <h2>Déploiement de GLPI intégré à un domaine Active Directory</h2>
-                                <p>Un petit SI monté de zéro : domaine AD, GLPI sous Debian relié à l'annuaire en LDAPS, inventaire automatique et GPO.</p>
-                                <p class="project-slide-tags">GLPI · AD DS · LDAPS · GPO</p>
-                                <span class="link-more">Lire la fiche →</span>
+                            <a class="work-card" href="projets/projet2.html">
+                                <div class="work-card-media">
+                                    <span class="work-card-badge">Entreprise</span>
+                                    <span class="work-card-placeholder" aria-hidden="true"><i class="fas fa-shield-halved"></i></span>
+                                </div>
+                                <div class="work-card-body">
+                                    <p class="work-card-meta">1re année · Sécurité du parc</p>
+                                    <h3>Migration de postes vers un nouveau site SentinelOne</h3>
+                                    <p>64 postes et serveurs à rattacher à leur nouveau site, alors que l&#x27;anti-altération de l&#x27;agent bloquait la procédure habituelle.</p>
+                                    <ul class="tag-list" aria-label="Technologies"><li class="tag">SentinelOne</li><li class="tag">EDR</li><li class="tag">Mode sans échec</li></ul>
+                                    <span class="link-more">Lire la fiche →</span>
+                                </div>
                             </a>
                         </li>
                         <li>
-                            <a href="projets/projet2.html" class="project-slide project-slide--pro">
-                                <span class="project-slide-num" aria-hidden="true">02</span>
-                                <p class="project-slide-meta">Entreprise · Cordon Group</p>
-                                <h2>Migration de postes vers un nouveau site SentinelOne</h2>
-                                <p>64 postes et serveurs à rattacher à leur nouveau site, alors que l'anti-altération de l'agent bloquait la procédure habituelle.</p>
-                                <p class="project-slide-tags">SentinelOne · EDR · Mode sans échec</p>
-                                <span class="link-more">Lire la fiche →</span>
+                            <a class="work-card" href="projets/projet4.html">
+                                <div class="work-card-media">
+                                    <span class="work-card-badge">Entreprise</span>
+                                    <span class="work-card-placeholder" aria-hidden="true"><i class="fas fa-id-card"></i></span>
+                                </div>
+                                <div class="work-card-body">
+                                    <p class="work-card-meta">1re et 2e année · Accès client</p>
+                                    <h3>Accès sécurisé au portail d&#x27;un client via Citrix, et script de mise à jour du kit</h3>
+                                    <p>L&#x27;accès au portail d&#x27;un client grand compte avec un badge à puce, puis un script PowerShell qui met à jour son kit de connexion sur chaque poste.</p>
+                                    <ul class="tag-list" aria-label="Technologies"><li class="tag">Citrix</li><li class="tag">PKI</li><li class="tag">PowerShell</li></ul>
+                                    <span class="link-more">Lire la fiche →</span>
+                                </div>
                             </a>
                         </li>
                         <li>
-                            <a href="projets/projet3.html" class="project-slide project-slide--lab">
-                                <span class="project-slide-num" aria-hidden="true">03</span>
-                                <p class="project-slide-meta">Lab · 1re année</p>
-                                <h2>Interconnexion de deux réseaux avec pfSense</h2>
-                                <p>Une VM pfSense qui route, filtre et donne l'accès à Internet à deux sous-réseaux isolés, Windows d'un côté, Debian de l'autre.</p>
-                                <p class="project-slide-tags">pfSense · Routage · NAT</p>
-                                <span class="link-more">Lire la fiche →</span>
+                            <a class="work-card" href="projets/projet5.html">
+                                <div class="work-card-media">
+                                    <span class="work-card-badge">Entreprise</span>
+                                    <span class="work-card-placeholder" aria-hidden="true"><i class="fas fa-tablet-screen-button"></i></span>
+                                </div>
+                                <div class="work-card-body">
+                                    <p class="work-card-meta">1re et 2e année · Libre-service</p>
+                                    <h3>Bornes de pose de congés en libre-service, et leur supervision</h3>
+                                    <p>Une borne en mode kiosque impossible à détourner, puis une supervision qui la remet en service seule quand le lecteur de badge se fige.</p>
+                                    <ul class="tag-list" aria-label="Technologies"><li class="tag">Mode kiosque</li><li class="tag">GPO</li><li class="tag">Supervision</li></ul>
+                                    <span class="link-more">Lire la fiche →</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="work-group work-group--lab" aria-labelledby="groupe-lab">
+                    <div class="work-group-head">
+                        <h2 id="groupe-lab">En formation</h2>
+                        <span class="work-group-count">4 réalisations</span>
+                    </div>
+                    <ul class="work-grid">
+                        <li>
+                            <a class="work-card" href="projets/projet6.html">
+                                <div class="work-card-media">
+                                    <span class="work-card-badge">Lab</span>
+                                    <img src="../assets/preuves/A3/zabbix-hotes.webp" width="1592" height="546" loading="lazy" decoding="async" alt="Zabbix : les deux serveurs du mini-SI supervisés">
+                                </div>
+                                <div class="work-card-body">
+                                    <p class="work-card-meta">2e année · Mini-SI</p>
+                                    <h3>Déploiement d&#x27;un mini-SI d&#x27;entreprise conteneurisé</h3>
+                                    <p>3 VM et 11 conteneurs : AD, proxy imposé par GPO, GLPI en LDAPS, supervision, logs centralisés et restauration testée.</p>
+                                    <ul class="tag-list" aria-label="Technologies"><li class="tag">Docker</li><li class="tag">GLPI</li><li class="tag">Zabbix</li><li class="tag">restic</li></ul>
+                                    <span class="link-more">Lire la fiche →</span>
+                                </div>
                             </a>
                         </li>
                         <li>
-                            <a href="projets/projet4.html" class="project-slide project-slide--pro">
-                                <span class="project-slide-num" aria-hidden="true">04</span>
-                                <p class="project-slide-meta">Entreprise · Cordon Group</p>
-                                <h2>Accès sécurisé au portail d'un client via Citrix et carte à puce</h2>
-                                <p>Des postes préparés pour accéder aux ressources d'un client grand compte, avec authentification forte par carte à puce.</p>
-                                <p class="project-slide-tags">Citrix · NetScaler · PKI</p>
-                                <span class="link-more">Lire la fiche →</span>
+                            <a class="work-card" href="projets/projet7.html">
+                                <div class="work-card-media">
+                                    <span class="work-card-badge">Lab</span>
+                                    <img src="../assets/projets/projet7/regle-openvpn.webp" width="1326" height="650" loading="lazy" decoding="async" alt="Règle de pare-feu pfSense pour le tunnel OpenVPN">
+                                </div>
+                                <div class="work-card-body">
+                                    <p class="work-card-meta">2e année · Accès distant</p>
+                                    <h3>Accès VPN nomade avec OpenVPN et authentification AD</h3>
+                                    <p>Un tunnel OpenVPN sur pfSense, réservé à un groupe AD, validé depuis un PC distant et depuis un téléphone.</p>
+                                    <ul class="tag-list" aria-label="Technologies"><li class="tag">pfSense</li><li class="tag">OpenVPN</li><li class="tag">LDAP</li></ul>
+                                    <span class="link-more">Lire la fiche →</span>
+                                </div>
                             </a>
                         </li>
                         <li>
-                            <a href="projets/projet5.html" class="project-slide project-slide--pro">
-                                <span class="project-slide-num" aria-hidden="true">05</span>
-                                <p class="project-slide-meta">Entreprise · Cordon Group</p>
-                                <h2>Borne tactile en mode kiosque pour la prise de congés</h2>
-                                <p>Un poste en libre-service qui n'affiche qu'une page web, simple à utiliser et impossible à détourner.</p>
-                                <p class="project-slide-tags">Windows 11 · Mode kiosque · Autologon</p>
-                                <span class="link-more">Lire la fiche →</span>
+                            <a class="work-card" href="projets/projet1.html">
+                                <div class="work-card-media">
+                                    <span class="work-card-badge">Lab</span>
+                                    <img src="../assets/projets/projet1/ticket-sla.webp" width="1600" height="849" loading="lazy" decoding="async" alt="Ticket GLPI avec ses échéances de SLA">
+                                </div>
+                                <div class="work-card-body">
+                                    <p class="work-card-meta">1re année · Helpdesk</p>
+                                    <h3>Déploiement de GLPI intégré à un domaine Active Directory</h3>
+                                    <p>Un petit SI monté de zéro : domaine AD, GLPI sous Debian relié à l&#x27;annuaire en LDAPS, inventaire automatique et GPO.</p>
+                                    <ul class="tag-list" aria-label="Technologies"><li class="tag">GLPI</li><li class="tag">AD DS</li><li class="tag">LDAPS</li><li class="tag">GPO</li></ul>
+                                    <span class="link-more">Lire la fiche →</span>
+                                </div>
                             </a>
                         </li>
                         <li>
-                            <a href="projets/projet6.html" class="project-slide project-slide--lab">
-                                <span class="project-slide-num" aria-hidden="true">06</span>
-                                <p class="project-slide-meta">Lab · 2ᵉ année</p>
-                                <h2>Déploiement d'un mini-SI d'entreprise conteneurisé</h2>
-                                <p>3 VM et 11 conteneurs : AD, proxy imposé par GPO, GLPI en LDAPS, supervision, logs centralisés et restauration testée.</p>
-                                <p class="project-slide-tags">Docker · GLPI · Zabbix · restic</p>
-                                <span class="link-more">Lire la fiche →</span>
+                            <a class="work-card" href="projets/projet3.html">
+                                <div class="work-card-media">
+                                    <span class="work-card-badge">Lab</span>
+                                    <img src="../assets/projets/projet3/ping-inter-reseaux.webp" width="1400" height="616" loading="lazy" decoding="async" alt="Ping réussi entre les deux réseaux">
+                                </div>
+                                <div class="work-card-body">
+                                    <p class="work-card-meta">1re année · Réseau</p>
+                                    <h3>Interconnexion de deux réseaux avec pfSense</h3>
+                                    <p>Une VM pfSense qui route, filtre et donne l&#x27;accès à Internet à deux sous-réseaux isolés, Windows d&#x27;un côté, Debian de l&#x27;autre.</p>
+                                    <ul class="tag-list" aria-label="Technologies"><li class="tag">pfSense</li><li class="tag">Routage</li><li class="tag">NAT</li></ul>
+                                    <span class="link-more">Lire la fiche →</span>
+                                </div>
                             </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="work-group work-group--perso" aria-labelledby="groupe-perso">
+                    <div class="work-group-head">
+                        <h2 id="groupe-perso">Projets personnels</h2>
+                        <span class="work-group-count">2 projets</span>
+                    </div>
+                    <ul class="work-grid">
+                        <li>
+                            <article class="work-card">
+                                <div class="work-card-media">
+                                    <span class="work-card-badge">Projet perso</span>
+                                    <img src="../assets/projets/perso/enigma.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Écran d&#x27;accueil d&#x27;Enigma : boîte à outils et messagerie chiffrée">
+                                </div>
+                                <div class="work-card-body">
+                                    <p class="work-card-meta">Depuis octobre 2026 · Rust, Tauri</p>
+                                    <h3>Enigma : suite de confidentialité</h3>
+                                    <p>Une boîte à outils de chiffrement (codes classiques, AES, hachage) et une messagerie pair à pair chiffrée, sans serveur ni compte, qui passe entièrement par Tor.</p>
+                                    <ul class="tag-list" aria-label="Technologies"><li class="tag">Rust</li><li class="tag">Tauri</li><li class="tag">Tor</li><li class="tag">Chiffrement</li></ul>
+                                    <p class="work-card-state">En cours de développement</p>
+                                </div>
+                            </article>
                         </li>
                         <li>
-                            <a href="projets/projet7.html" class="project-slide project-slide--lab">
-                                <span class="project-slide-num" aria-hidden="true">07</span>
-                                <p class="project-slide-meta">Lab · 2ᵉ année</p>
-                                <h2>Accès VPN nomade avec OpenVPN et authentification AD</h2>
-                                <p>Un tunnel OpenVPN sur pfSense, réservé à un groupe AD, validé depuis un PC distant et depuis un téléphone.</p>
-                                <p class="project-slide-tags">pfSense · OpenVPN · LDAP</p>
-                                <span class="link-more">Lire la fiche →</span>
-                            </a>
+                            <article class="work-card">
+                                <div class="work-card-media">
+                                    <span class="work-card-badge">Projet perso</span>
+                                    <img src="../assets/projets/perso/oghma.webp" width="1200" height="750" loading="lazy" decoding="async" alt="Prototype de l&#x27;interface d&#x27;Oghma">
+                                </div>
+                                <div class="work-card-body">
+                                    <p class="work-card-meta">Depuis octobre 2026 · Vibecoding</p>
+                                    <h3>Oghma : espace de travail local-first</h3>
+                                    <p>Un outil qui remplace Notion : projets, cours et notes en fichiers Markdown, avec Claude Code intégré. Cahier des charges, registre des décisions et journal tenus à chaque séance.</p>
+                                    <ul class="tag-list" aria-label="Technologies"><li class="tag">Markdown</li><li class="tag">Gestion de projet</li><li class="tag">IA</li></ul>
+                                    <p class="work-card-state">Prototype d&#x27;interface</p>
+                                </div>
+                            </article>
                         </li>
-                    </ol>
-                </div>
+                    </ul>
+                </section>
             </div>
         </section>
     </main>
